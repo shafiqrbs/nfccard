@@ -44,10 +44,7 @@ function SignupIndex() {
                 <>
 
                     <Box p={'4'}>
-                        <Container p={0} className={'responsiveContainer'} >
-                            <SignupForm />
-                        </Container>
-
+                        <SignupForm />
                     </Box>
                 </>
             }

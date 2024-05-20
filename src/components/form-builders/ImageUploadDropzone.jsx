@@ -31,7 +31,7 @@ function ImageUploadDropzone(props) {
     const previews = files.map((file, index) => {
         const imageUrl = URL.createObjectURL(file);
         return (
-            <Image maw={240} mx="auto" radius="md" key={index} src={imageUrl} onLoad={() => URL.revokeObjectURL(imageUrl)} />);
+            <Image h={125} mx="auto" radius="md" key={index} src={imageUrl} onLoad={() => URL.revokeObjectURL(imageUrl)} />);
     });
 
     return (

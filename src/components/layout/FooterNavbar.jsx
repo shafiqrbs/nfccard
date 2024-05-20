@@ -20,10 +20,8 @@ function FooterNavbar() {
     const [opened, { toggle }] = useDisclosure(false);
 
     const links = [
-        { link: '/inventory/sales-invoice', label: t('Sales') },
-        { link: '/inventory/purchase-invoice', label: t('Purchase') },
-        { link: '/inventory/product', label: t('Product') },
-        { link: '/accounting/voucher-entry', label: t('Accounting') },
+        { link: '/home', label: t('Sales') },
+
     ];
 
     const items = links.map((link) => (
@@ -41,8 +39,7 @@ function FooterNavbar() {
     ));
 
     const leftLinks = [
-        { link: '/', label: t('Home') },
-        { link: '/sitemap', label: t('Sitemap') },
+        { link: '/home', label: t('Home') },
     ];
 
     const leftItems = leftLinks.map((link) => (
@@ -61,13 +58,13 @@ function FooterNavbar() {
 
     return (
         <>
-            <footer className={classes.footer} mt={'xs'}>
+            <footer className={classes.footer} mt={'xs'} >
                 <div className={classes.inner} mt={'xs'}>
-                    <Group gap={5} className={classes.links} visibleFrom="sm">
+                    <Group gap={5} className={classes.links} >
                         {leftItems}
                     </Group>
                     <Group>
-                        <Group ml={50} gap={5} className={classes.links} visibleFrom="sm">
+                        <Group ml={50} gap={5} className={classes.links} >
                             {items}
                         </Group>
                     </Group>

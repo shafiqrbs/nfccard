@@ -82,6 +82,7 @@ input:focus {
     border: 1px solid rgba(226, 194, 194, 0.39);
     border-radius:4px;
 }
+
 .mantine-AppShell-main{
     padding-top: 42px !important;
     padding-bottom: 0 !important;
@@ -133,3 +134,15 @@ input[type=radio]:checked + label>img {
             rotateX(10deg);*/
 }
 
+.responsiveContainer {
+    
+    max-width: 300px;
+  
+    @media (min-width: em(400px)) {
+      max-width: 400px;
+    }
+  
+    @media (min-width: em(600px)) {
+      max-width: 600px;
+    }
+  }

@@ -133,7 +133,7 @@ function SignupForm() {
 
 
     return (
-        <Box >
+        <Box bg={'black'}>
             <form onSubmit={form.onSubmit((values) => {
                 dispatch(setValidationData(false))
                 modals.openConfirmModal({
@@ -160,10 +160,10 @@ function SignupForm() {
                             <Box bg={"white"} >
                                 <Box pl={`xs`} pb={'xs'} pr={8} pt={'xs'} mb={'xs'} className={'boxBackground borderRadiusAll'} >
                                     <Grid>
-                                        <Grid.Col span={8} h={54}>
+                                        <Grid.Col span={{ base: 8, sm: 8, md: 8 }} h={54}>
                                             <Title order={6} mt={'xs'} pl={'6'}>{t('Welcome to Signup')}</Title>
                                         </Grid.Col>
-                                        <Grid.Col span={4}>
+                                        <Grid.Col span={{ base: 4, sm: 4, md: 4 }}>
                                             <Stack right align="flex-end">
                                                 <>
                                                     {

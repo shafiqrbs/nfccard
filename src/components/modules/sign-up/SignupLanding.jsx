@@ -43,11 +43,8 @@ function SignupLanding() {
             {progress === 100 &&
                 <>
 
-                    {/* <Box p={'8'}>
-                        <Container className={'responsiveContainer'}>
-                            <SignupForm />
-                        </Container>
-
+                    {/* <Box p={'4'}>
+                        <SignupForm />
                     </Box> */}
                 </>
             }

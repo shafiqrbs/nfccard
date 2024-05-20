@@ -124,6 +124,11 @@ export default function Header({
         close()
     }]], []);
 
+    const [isClicked, setIsClicked] = useState(false);
+    const handleClick = () => {
+        setIsClicked(true);
+        navigate('/sign-up');
+    };
     const links = mockdata.map((item) => (
         <UnstyledButton className={HeaderStyle.subLink} key={item.title}>
             <Group wrap="nowrap" align="flex-start">
@@ -146,117 +151,55 @@ export default function Header({
     ));
     return (
         <>
-            <Modal.Root
-                opened={opened}
-                onClose={close}
-                size="60%"
-            >
-                <Modal.Overlay />
-                <Modal.Content p={'xs'}>
-                    <Modal.Header>
-                        <Modal.Title>{configData && configData.domain ? configData.domain.name : 'Store Name'}</Modal.Title>
-                        <Modal.CloseButton />
-                    </Modal.Header>
-                    <Modal.Body>
-                        <SearchModal onClose={close} />
-                    </Modal.Body>
-                </Modal.Content>
-            </Modal.Root>
-            <Box bg={'white'} h={`100%`} pos={`relative`}>
-                <Group justify="space-between" h="100%" pl={'md'} px={`xs`} mr={'4'}>
+
+            <Box bg={'white'} pos={`relative`}>
+                <Group justify="space-between" h="100%" bg={'white'} pr={'xs'} pl={'xs'} className="borderRadiusHeader">
                     <Group>
                         <NavLink
                             href="/"
                             c={'red'}
                             fw={'800'}
                             component="button"
-                            label={configData && configData.domain ? configData.domain.name : 'Store Name'}
-                            onClick={(e) => { navigate('/') }}
+                            label={'LazyCoders'}
+                            onClick={(e) => { setIsClicked(false); navigate('/home') }}
                         />
-                        {/*<Tooltip
-                            label={navbarOpened ? t("collapse_navbar") : t("expand_navbar")}
-                            bg={`red.4`}
-                            position="right-center"
-                            color="red"
-                            withArrow
-                        >
-                            <Burger onClick={toggleNavbar} size="sm"/>
-                        </Tooltip>*/}
-                        {/*  <HoverCard
-                            width={600}
-                            position="bottom"
-                            radius="md"
-                            shadow="md"
-                            withinPortal
-                        >
-                            <HoverCard.Target>
-                                <Center
-                                    inline
-                                    fw={500}
-                                    fz={`var(--mantine-font-size-sm)`}
-                                    style={{cursor: "default"}}
-                                >
-                                    <Box component="span" mr={5}>
-                                        {t("QuickMenu")}
-                                    </Box>
-                                    <IconChevronDown
-                                        style={{width: rem(16), height: rem(16)}}
-                                        color={theme.colors.blue[6]}
-                                    />
-                                </Center>
-                            </HoverCard.Target>
-                            <HoverCard.Dropdown style={{overflow: "hidden"}} mt={"xs"}>
-                                <Group justify="space-between" px="md">
-                                    <Text fw={500}>Features</Text>
-                                    <Anchor href="#" fz="xs">
-                                        View all
-                                    </Anchor>
-                                </Group>
 
-                                <Divider my="sm"/>
-
-                                <SimpleGrid cols={2}>{links}</SimpleGrid>
-
-                                <div className={HeaderStyle.dropdownFooter}>
-                                    <Group justify="space-between">
-                                        <div>
-                                            <Text fw={500} fz="sm">
-                                                Get started
-                                            </Text>
-                                            <Text size="xs" c="dimmed">
-                                                Their food sources have decreased, and their numbers
-                                            </Text>
-                                        </div>
-                                        <Button variant="default">Get started</Button>
-                                    </Group>
-                                </div>
-                            </HoverCard.Dropdown>
-                        </HoverCard>*/}
                     </Group>
-                    <Group>
-                        <Flex direction={`column`} align={'center'} w={'600'}>
+                    <Group >
+                        {!isClicked && (
                             <Button
-                                leftSection={
-                                    <>
-                                        <IconSearch size={16} c={'red.5'} />
-                                        <Text fz={`xs`} pl={'xs'} c={'gray.8'}>{t("SearchMenu")}</Text>
-                                    </>
-                                }
-                                fullWidth
-                                variant="transparent"
-                                rightSection={
-                                    <>
-                                        <Kbd h={'24'} c={'gray.8'} fz={'12'}>Alt </Kbd> + <Kbd c={'gray.8'} h={'24'}
-                                            fz={'12'}> K</Kbd>
-                                    </>
-                                }
-                                w={`100%`}
-                                h={'32'}
-                                justify="space-between"
-                                style={{ border: `2px solid var(--mantine-color-gray-5)` }}
-                                color={`gray`}
-                                onClick={open}
-                            />
+                                size="xs"
+                                color="red.6"
+                                type="submit"
+                                mt={4}
+                                id="EntityFormSubmit"
+                                onClick={handleClick}
+                            >
+                                <Flex direction="column" gap={0}>
+                                    <Text fz={12} fw={400}>
+                                        Sign Up
+                                    </Text>
+                                </Flex>
+                            </Button>
+                        )}
+                    </Group>
+                    {/* <Group>
+                        <Flex direction={`column`} align={'flex-end'} >
+                            <Button
+                                size="xs"
+                                color={`red.6`}
+                                type="submit"
+                                mt={4}
+                                id="EntityFormSubmit"
+                            // leftSection={<IconDeviceFloppy size={16} />}
+                            >
+
+                                <Flex direction={`column`} gap={0}>
+                                    <Text fz={12} fw={400}>
+                                        {t("SignUp")}
+                                    </Text>
+                                </Flex>
+                            </Button>
                         </Flex>
 
                     </Group>
@@ -328,9 +271,9 @@ export default function Header({
                                 <IconLogout size={24} />
                             </ActionIcon>
                         </Tooltip>
-                    </Group>
+                    </Group> */}
                 </Group>
-                {/*<Spotlight
+                {/* <Spotlight
                     actions={getSpotlightDropdownData()}
                     nothingFound={t("NothingFound")}
                     highlightQuery
@@ -338,7 +281,7 @@ export default function Header({
                         leftSection: <IconSearch size={'xs'} style={{ width: rem(20), height: rem(20) }} stroke={1.5} />,
                         placeholder: t("SearchMenu"),
                     }}
-                />*/}
+                /> */}
                 <Notification
                     pos={`absolute`}
                     display={isOnline ? "none" : ""}

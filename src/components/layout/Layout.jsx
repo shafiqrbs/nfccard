@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
-import {Navigate, Outlet, useLocation,useOutletContext} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Navigate, Outlet, useLocation, useOutletContext } from "react-router-dom";
 import Header from "./Header";
-import {AppShell, Grid} from "@mantine/core";
-import {useDisclosure, useViewportSize} from "@mantine/hooks";
+import { AppShell, Grid, Container } from "@mantine/core";
+import { useDisclosure, useViewportSize } from "@mantine/hooks";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import MainDashboard from "../modules/dashboard/MainDashboard";
@@ -12,18 +12,18 @@ import ProductUpdateForm from "../modules/inventory/product/ProductUpdateForm";
 console.log(window.location.href);
 
 function Layout() {
-    const [mobileOpened, {toggle: toggleMobile}] = useDisclosure(false);
-    const [navbarOpened, {toggle: toggleNavbar}] = useDisclosure(true);
-    const [rightSidebarOpened, {toggle: toggleRightSideBar}] = useDisclosure(false);
-    const {height, width} = useViewportSize();
+    const [mobileOpened, { toggle: toggleMobile }] = useDisclosure(false);
+    const [navbarOpened, { toggle: toggleNavbar }] = useDisclosure(true);
+    const [rightSidebarOpened, { toggle: toggleRightSideBar }] = useDisclosure(false);
+    const { height, width } = useViewportSize();
     const [isOnline, setNetworkStatus] = useState(navigator.onLine);
 
     const user = localStorage.getItem("user");
     const location = useLocation();
     const paramPath = window.location.pathname;
-    if(!user){
-        return <Navigate replace to="/login"/>;
-    }else{
+    if (!user) {
+        return <Navigate replace to="/login" />;
+    } else {
         /*let userGroup = JSON.parse(user).user_group;
 
         if (userGroup==='admin'){
@@ -55,51 +55,40 @@ function Layout() {
 
     return (
         <>
+
             <AppShell
-                header={{height: headerHeight}}
-                footer={{height: footerHeight}}
-                /*navbar={{
-                    width: 200,
-                    breakpoint: "sm",
-                    collapsed: {mobile: !mobileOpened, desktop: !navbarOpened},
-                }}*/
-                /*aside={{
-                    width: 88,
-                    breakpoint: "sm",
-                    collapsed: {mobile: !mobileOpened, desktop: rightSidebarOpened},
-                }}*/
+                header={{ height: headerHeight }}
+                footer={{ height: footerHeight }}
                 padding="0"
             >
-                <AppShell.Header bg={`gray.0`}>
-                    <Header
-                        isOnline={isOnline}
-                        navbarOpened={navbarOpened}
-                        toggleNavbar={toggleNavbar}
-                        rightSidebarOpened={rightSidebarOpened}
-                        toggleRightSideBar={toggleRightSideBar}
-                    />
-                </AppShell.Header>
-               {/*
-                <AppShell.Navbar p="xs">
-                    <Navbar/>
-                </AppShell.Navbar>
-                */}
-                <AppShell.Main>
-                    {
-                        paramPath !== '/' ?
-                            <Outlet context={{isOnline, mainAreaHeight}}/>
-                            :
-                            <MainDashboard height={mainAreaHeight} />
-                    }
 
+                <AppShell.Header >
+                    <Container w={{ base: 300, sm: 300, md: 800, lg: 800 }}>
+                        <Header
+                            isOnline={isOnline}
+                            navbarOpened={navbarOpened}
+                            toggleNavbar={toggleNavbar}
+                            rightSidebarOpened={rightSidebarOpened}
+                            toggleRightSideBar={toggleRightSideBar}
+                        />
+                    </Container>
+                </AppShell.Header>
+
+                <AppShell.Main>
+                    <Container w={{ base: 300, sm: 400, md: 800, lg: 800 }}>
+                        {
+                            <Outlet context={{ isOnline, mainAreaHeight }} />
+                        }
+                    </Container>
                 </AppShell.Main>
-                {/*<AppShell.Shortcut p="xs">
-                    <Shortcut/>
-                </AppShell.Shortcut>*/}
                 <AppShell.Footer>
-                    <Footer/>
+                    <Container w={{ base: 300, sm: 400, md: 800, lg: 800 }}>
+                        <Footer />
+                    </Container>
                 </AppShell.Footer>
-            </AppShell>
+
+            </AppShell >
+
         </>
     );
 }
