@@ -39,21 +39,18 @@ import {
     IconChevronLeft,
     IconChevronRight,
     IconWifiOff,
-    IconTableShortcut,
     IconCategory
 } from "@tabler/icons-react";
 import HeaderStyle from "./../../assets/css/Header.module.css";
-import LanguagePickerStyle from "./../../assets/css/LanguagePicker.module.css";
-import { Spotlight, spotlight } from "@mantine/spotlight";
+
 import "@mantine/spotlight/styles.css";
 import React, { useEffect, useState } from "react";
 import flagBD from "../../assets/images/flags/bd.svg";
 import flagGB from "../../assets/images/flags/gb.svg";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import getSpotlightDropdownData from "../global-hook/spotlight-dropdown/getSpotlightDropdownData.js";
+
 import getConfigData from "../global-hook/config-data/getConfigData.js";
-import SearchModal from "../modules/modals/SearchModal.jsx";
 
 const mockdata = [
     {

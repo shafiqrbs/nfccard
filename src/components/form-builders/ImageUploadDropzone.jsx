@@ -1,55 +1,42 @@
 import React, { useState } from "react";
-import {
-    Tooltip,
-    Select, SimpleGrid, Text, Image, Flex, Center
-} from "@mantine/core";
-import { getHotkeyHandler } from "@mantine/hooks";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { Text, Image, useMantineTheme, Center } from "@mantine/core";
 
 function ImageUploadDropzone(props) {
-    const {
-        label,
-        placeholder,
-        required,
-        nextField,
-        name,
-        form,
-        tooltip,
-        mt,
-        id,
-        dropdownValue,
-        searchable,
-        value,
-        changeValue,
-        base,
-        sm,
-        lg
-    } = props
+    const { placeholder } = props;
+    const [file, setFile] = useState(null);
+    const theme = useMantineTheme();
 
-    const [files, setFiles] = useState([]);
+    const handleDrop = (files) => {
+        // Ensure only one file is accepted
+        if (files.length > 0) {
+            setFile(files[0]);
+        }
+    };
 
-    const previews = files.map((file, index) => {
-        const imageUrl = URL.createObjectURL(file);
-        return (
-            <Image h={125} mx="auto" radius="md" key={index} src={imageUrl} onLoad={() => URL.revokeObjectURL(imageUrl)} />);
-    });
+    const imageUrl = file ? URL.createObjectURL(file) : null;
 
     return (
         <>
-            <div>
-                <Dropzone accept={IMAGE_MIME_TYPE} onDrop={setFiles}>
-                    <Text ta="center">{placeholder}</Text>
-                </Dropzone>
+            <Dropzone
+                accept={IMAGE_MIME_TYPE}
+                onDrop={handleDrop}
+                multiple={false}
+                style={{
+                    border: `2px dashed ${theme.colors.gray[3]}`,
+                    borderRadius: '4px',
+                    padding: '20px',
+                    textAlign: 'center',
+                }}
+            >
+                <Text>{placeholder}</Text>
+            </Dropzone>
+            <Center mt={'md'}>
+                {imageUrl && (
+                    <Image h={125} w={'auto'} radius="md" src={imageUrl} onLoad={() => URL.revokeObjectURL(imageUrl)} />
+                )}
+            </Center>
 
-                <Center mt={previews.length > 0 ? 'xl' : 0}>
-                    <div>
-                        <SimpleGrid cols={{ base: 1, sm: 1, lg: 1 }}>
-                            {previews}
-                        </SimpleGrid>
-
-                    </div>
-                </Center>
-            </div>
         </>
     );
 }

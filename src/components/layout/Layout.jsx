@@ -3,11 +3,9 @@ import { Navigate, Outlet, useLocation, useOutletContext } from "react-router-do
 import Header from "./Header";
 import { AppShell, Grid, Container } from "@mantine/core";
 import { useDisclosure, useViewportSize } from "@mantine/hooks";
-import Navbar from "./Navbar";
+
 import Footer from "./Footer";
-import MainDashboard from "../modules/dashboard/MainDashboard";
-import ProductForm from "../modules/inventory/product/ProductForm";
-import ProductUpdateForm from "../modules/inventory/product/ProductUpdateForm";
+
 
 console.log(window.location.href);
 

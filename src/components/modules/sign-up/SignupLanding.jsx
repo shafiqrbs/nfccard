@@ -12,8 +12,7 @@ import {
     setSearchKeyword
 } from "../../../store/core/crudSlice.js";
 import { getLoadingProgress } from "../../global-hook/loading-progress/getLoadingProgress.js";
-import CoreHeaderNavbar from "../core/CoreHeaderNavbar.jsx";
-import SignupForm from "./SignupForm.jsx";
+
 
 function SignupLanding() {
     const { t, i18n } = useTranslation();
