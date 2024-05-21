@@ -47,53 +47,45 @@ function SignupForm() {
     const form = useForm({
         initialValues: {
             name: '',
-            customer_group: '',
-            credit_limit: '',
-            reference_id: '',
-            mobile: '',
-            alternative_mobile: '',
             email: '',
-            location_id: '',
-            marketing_id: '',
+            phone: '',
+            twitterAccount: '',
+            linkedinAccount: '',
+            profilePic: [],
+            companyName: '',
+            designation: '',
+            companyWebsite: '',
+            companyEmail: '',
+            companyLogo: [],
             address: '',
         },
         validate: {
             name: hasLength({ min: 2, max: 20 }),
-            mobile: (value) => (!/^\d+$/.test(value)),
+            companyName: hasLength({ min: 2, max: 20 }),
+            designation: hasLength({ min: 2, max: 20 }),
+            phone: (value) => (!/^\d+$/.test(value)),
             email: (value) => {
                 if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
                     return true;
                 }
                 return null;
             },
-            credit_limit: (value) => {
-                if (value) {
-                    const isNumberOrFractional = /^-?\d+(\.\d+)?$/.test(value);
-                    if (!isNumberOrFractional) {
-                        return true;
-                    }
-                }
-                return null;
-            },
-            alternative_mobile: (value) => {
-                if (value && value.trim()) {
-                    const isDigitsOnly = /^\d+$/.test(value);
-                    if (!isDigitsOnly) {
-                        return true;
-                    }
-                }
-                return null;
-            },
+            address: hasLength({ min: 2, max: 20 }),
+            companyWebsite: hasLength({ min: 2, max: 20 }),
+            companyLogo: (value) => value.length === 0,
         }
     });
-
-
     useEffect(() => {
         if (validation) {
             validationMessage.name && (form.setFieldError('name', true));
-            validationMessage.mobile && (form.setFieldError('mobile', true));
+            validationMessage.companyName && (form.setFieldError('companyName', true));
+            validationMessage.mobile && (form.setFieldError('phone', true));
             validationMessage.email && (form.setFieldError('email', true));
+            validationMessage.designation && (form.setFieldError('designation', true));
+            validationMessage.companyWebsite && (form.setFieldError('companyWebsite', true));
+            validationMessage.address && (form.setFieldError('address', true));
             validationMessage.credit_limit && (form.setFieldError('credit_limit', true));
+            validationMessage.companyLogo && (form.setFieldError('companyLogo', true));
             validationMessage.alternative_mobile && (form.setFieldError('alternative_mobile', true));
             dispatch(setValidationData(false))
         }
@@ -119,17 +111,6 @@ function SignupForm() {
         }
     }, [validation, validationMessage, form]);
 
-    useHotkeys([['alt+n', () => {
-        document.getElementById('CustomerName').focus()
-    }]], []);
-
-    useHotkeys([['alt+r', () => {
-        form.reset()
-    }]], []);
-
-    useHotkeys([['alt+s', () => {
-        document.getElementById('EntityFormSubmit').click()
-    }]], []);
 
 
     return (
@@ -160,31 +141,8 @@ function SignupForm() {
                             <Box  >
                                 <Box pl={`xs`} pb={'xs'} pr={8} pt={'xs'} className={'boxBackground borderRadiusAll'}  >
                                     <Grid >
-                                        <Grid.Col span={{ base: 8, sm: 8, md: 8 }} h={54}>
+                                        <Grid.Col h={54}>
                                             <Title order={6} mt={'xs'} pl={'6'}>{t('Welcome to Signup')}</Title>
-                                        </Grid.Col>
-                                        <Grid.Col span={{ base: 4, sm: 4, md: 4 }}>
-                                            <Stack right align="flex-end">
-                                                <>
-                                                    {
-                                                        !saveCreateLoading && isOnline &&
-                                                        <Button
-                                                            size="xs"
-                                                            color={`red.6`}
-                                                            type="submit"
-                                                            mt={4}
-                                                            id="EntityFormSubmit"
-                                                        // leftSection={<IconDeviceFloppy size={16} />}
-                                                        >
-
-                                                            <Flex direction={`column`} gap={0}>
-                                                                <Text fz={12} fw={400}>
-                                                                    {t("Submit")}
-                                                                </Text>
-                                                            </Flex>
-                                                        </Button>
-                                                    }
-                                                </></Stack>
                                         </Grid.Col>
                                     </Grid>
                                 </Box>
@@ -195,27 +153,35 @@ function SignupForm() {
                                             <Alert variant="light" color="red" radius="md" title={
                                                 <List withPadding size="sm">
                                                     {validationMessage.name && <List.Item>{t('NameValidateMessage')}</List.Item>}
-                                                    {validationMessage.mobile && <List.Item>{t('MobileValidateMessage')}</List.Item>}
+                                                    {validationMessage.companyName && <List.Item>{t('CompanyNameValidateMessage')}</List.Item>}
+
+                                                    {validationMessage.email && <List.Item>{t('email')}</List.Item>}
+                                                    {validationMessage.companyLogo && <List.Item>{t('companyLogo')}</List.Item>}
+                                                    {validationMessage.designation && <List.Item>{t('designation')}</List.Item>}
+                                                    {validationMessage.phone && <List.Item>{t('phone')}</List.Item>}
+                                                    {validationMessage.address && <List.Item>{t('address')}</List.Item>}
+                                                    {validationMessage.companyWebsite && <List.Item>{t('companyWebsite')}</List.Item>}
                                                     {validationMessage.alternative_mobile && <List.Item>{t('AlternativeMobile')}</List.Item>}
                                                 </List>
                                             }></Alert>
                                         }
+
                                         <Box mt={'xs'}>
-                                            <ScrollArea h={height} scrollbarSize={2} scrollbars="y" type="never"  >
+                                            <ScrollArea h={height - 60} scrollbarSize={2} scrollbars="y" type="never"  >
                                                 <Grid columns={12} >
                                                     {/* 1st column */}
                                                     <Grid.Col span={{ base: 12, sm: 12, md: 6, lg: 6 }}    >
-                                                        <Box h={height - 10} pl={`xs`} pr={8} pt={'xs'} className="borderRadiusAll">
-                                                            <Box pl={`xs`} pb={'xs'} pr={8} pt={'xs'} mb={'xs'} className={'boxBackground borderRadiusAll'} >
+                                                        <Box h={{ base: '100%', sm: '100%', md: height - 70 }} pl={`xs`} pr={8} pt={'xs'} pb={{ base: 'sm', sm: 'sm', md: 0 }} className="borderRadiusAll">
+                                                            <Box pl={`xs`} pb={'xs'} pr={8} pt={'xs'} className={'boxBackground borderRadiusAll'} >
                                                                 <Grid>
-                                                                    <Grid.Col h={54}>
-                                                                        <Title order={6} mt={'xs'} pl={'6'}>{t('Personal Information')}</Title>
+                                                                    <Grid.Col h={35}>
+                                                                        <Title order={6} pl={'6'}>{t('Personal Information')}</Title>
                                                                     </Grid.Col>
                                                                 </Grid>
                                                             </Box>
                                                             <Box  >
                                                                 <Box>
-                                                                    <Grid gutter={{ base: 4 }}   >
+                                                                    <Grid gutter={{ base: 4 }} mt={'xs'}>
                                                                         <Grid.Col span={{ base: 12, sm: 12, md: 4, lg: 4 }} >
                                                                             <Box mt={{ base: 1, sm: 1, md: 'xs', lg: 'xs' }}>
                                                                                 <Flex
@@ -223,10 +189,8 @@ function SignupForm() {
                                                                                     align="center"
                                                                                     direction="row"
                                                                                 >
-                                                                                    <Text
-                                                                                        textAlign="center" fz="sm"
-                                                                                        fw={300}>
-                                                                                        {t('Name')}
+                                                                                    <Text textAlign="center" fz="sm" fw={300}>
+                                                                                        {t('Name')}<Text component="span" c="red">*</Text>
                                                                                     </Text>
                                                                                 </Flex>
                                                                             </Box>
@@ -234,15 +198,14 @@ function SignupForm() {
                                                                         <Grid.Col span={{ base: 12, sm: 12, md: 8, lg: 8 }}>
                                                                             <Box mt={1} >
                                                                                 <InputForm
-                                                                                    tooltip={t('Name')}
-                                                                                    // label={t('Name')}
+                                                                                    tooltip={t('NameValidateMessage')}
                                                                                     placeholder={t('Name')}
                                                                                     required={true}
-                                                                                    nextField={'designation'}
-                                                                                    name={'customer_name'}
+                                                                                    nextField={'email'}
+                                                                                    name={'name'}
                                                                                     form={form}
-
-                                                                                    id={'customerName'}
+                                                                                    mt={0}
+                                                                                    id={'name'}
                                                                                 />
                                                                             </Box>
                                                                         </Grid.Col>
@@ -257,10 +220,8 @@ function SignupForm() {
                                                                                     align="center"
                                                                                     direction="row"
                                                                                 >
-                                                                                    <Text
-                                                                                        ta="center" fz="sm"
-                                                                                        fw={300}>
-                                                                                        {t('Email')}
+                                                                                    <Text textAlign="center" fz="sm" fw={300}>
+                                                                                        {t('Email')}<Text component="span" c="red">*</Text>
                                                                                     </Text>
                                                                                 </Flex>
                                                                             </Box>
@@ -286,17 +247,17 @@ function SignupForm() {
                                                                     <Grid gutter={{ base: 4 }}>
                                                                         <Grid.Col span={{ base: 12, sm: 12, md: 4, lg: 4 }}>
                                                                             <Box mt={{ base: 1, sm: 1, md: 'md', lg: 'md' }}>
-                                                                                <Flex
-                                                                                    justify="flex-start"
-                                                                                    align="center"
-                                                                                    direction="row"
-                                                                                >
-                                                                                    <Text
-                                                                                        ta="center" fz="sm"
-                                                                                        fw={300}>
-                                                                                        {t('Phone')}
-                                                                                    </Text>
-                                                                                </Flex>
+                                                                                <Box mt={{ base: 1, sm: 1, md: 'md', lg: 'md' }}>
+                                                                                    <Flex
+                                                                                        justify="flex-start"
+                                                                                        align="center"
+                                                                                        direction="row"
+                                                                                    >
+                                                                                        <Text textAlign="center" fz="sm" fw={300}>
+                                                                                            {t('Phone')}<Text component="span" c="red">*</Text>
+                                                                                        </Text>
+                                                                                    </Flex>
+                                                                                </Box>
                                                                             </Box>
                                                                         </Grid.Col>
                                                                         <Grid.Col span={{ base: 12, sm: 12, md: 8, lg: 8 }}>
@@ -306,7 +267,7 @@ function SignupForm() {
                                                                                     // label={t('Phone')}
                                                                                     placeholder={t('Phone')}
                                                                                     required={true}
-                                                                                    nextField={'companyWebsite'}
+                                                                                    nextField={'twitterAccount'}
                                                                                     name={'phone'}
                                                                                     form={form}
                                                                                     mt={{ base: 1, sm: 1, md: '8', lg: '8' }}
@@ -374,7 +335,7 @@ function SignupForm() {
                                                                                     // label={t('LinkedinAccount')}
                                                                                     placeholder={t('LinkedinAccount')}
                                                                                     required={false}
-                                                                                    nextField={'profilePic'}
+                                                                                    nextField={'companyName'}
                                                                                     name={'linkedinAccount'}
                                                                                     form={form}
                                                                                     mt={{ base: 1, sm: 1, md: '8', lg: '8' }}
@@ -391,7 +352,7 @@ function SignupForm() {
                                                                                 <Flex
                                                                                     mih={{ base: 30, sm: 30, md: 80 }}
                                                                                     gap="md"
-                                                                                    mt={'xs'}
+                                                                                    mt={{ base: '1', sm: '1', md: 'sm', lg: 'sm' }}
                                                                                     justify="flex-start"
                                                                                     align="center"
                                                                                     direction="row"
@@ -413,7 +374,7 @@ function SignupForm() {
                                                                                     form={form}
                                                                                     required={false}
                                                                                     placeholder={t('DropProfilePictureHere')}
-                                                                                    nextField={'removeImage'}
+                                                                                    nextField={''}
                                                                                 />
                                                                             </Box>
                                                                         </Grid.Col>
@@ -426,17 +387,17 @@ function SignupForm() {
 
                                                     <Grid.Col span={{ base: 12, sm: 12, md: 6, lg: 6 }} >
 
-                                                        <Box h={height - 10} pl={`xs`} pr={8} pt={'xs'} className="borderRadiusAll">
-                                                            <Box pl={`xs`} pb={'xs'} pr={8} pt={'xs'} mb={'xs'} className={'boxBackground borderRadiusAll'} >
+                                                        <Box h={{ base: 'auto', sm: 'auto', md: height - 70 }} pl={`xs`} pr={8} pt={'xs'} pb={{ base: 'sm', sm: 'sm', md: 0 }} className="borderRadiusAll">
+                                                            <Box pl={`xs`} pb={'xs'} pr={8} pt={'xs'} className={'boxBackground borderRadiusAll'} >
                                                                 <Grid>
-                                                                    <Grid.Col h={54}>
-                                                                        <Title order={6} mt={'xs'} pl={'6'}>{t('Company Information')}</Title>
+                                                                    <Grid.Col h={35}>
+                                                                        <Title order={6} pl={'6'}>{t('Company Information')}</Title>
                                                                     </Grid.Col>
                                                                 </Grid>
                                                             </Box>
                                                             <Box  >
                                                                 <Box>
-                                                                    <Grid gutter={{ base: 4 }} >
+                                                                    <Grid gutter={{ base: 4 }} mt={'xs'}>
                                                                         <Grid.Col span={{ base: 12, sm: 12, md: 4, lg: 4 }} >
                                                                             <Box mt={{ base: 1, sm: 1, md: 'xs', lg: 'xs' }}>
                                                                                 <Flex
@@ -444,24 +405,21 @@ function SignupForm() {
                                                                                     align="center"
                                                                                     direction="row"
                                                                                 >
-                                                                                    <Text
-                                                                                        textAlign="center"
-                                                                                        fz="sm"
-                                                                                        fw={300}>
-                                                                                        {t('CompanyName')}
+                                                                                    <Text textAlign="center" fz="sm" fw={300}>
+                                                                                        {t('CompanyName')}<Text component="span" c="red">*</Text>
                                                                                     </Text>
                                                                                 </Flex>
+
                                                                             </Box>
                                                                         </Grid.Col>
                                                                         <Grid.Col span={{ base: 12, sm: 12, md: 8, lg: 8 }}>
                                                                             <Box >
                                                                                 <InputForm
-                                                                                    tooltip={t('CompanyName')}
-                                                                                    // label={t('CompanyName')}
+                                                                                    tooltip={t('CompanyNameValidateMessage')}
                                                                                     placeholder={t('CompanyName')}
                                                                                     required={true}
-                                                                                    nextField={'customerName'}
-                                                                                    name={'company_name'}
+                                                                                    nextField={'designation'}
+                                                                                    name={'companyName'}
                                                                                     form={form}
                                                                                     mt={0}
                                                                                     id={'companyName'}
@@ -480,13 +438,11 @@ function SignupForm() {
                                                                                     align="center"
                                                                                     direction="row"
                                                                                 >
-                                                                                    <Text
-                                                                                        textAlign="center"
-                                                                                        fz="sm"
-                                                                                        fw={300}>
-                                                                                        {t('Designation')}
+                                                                                    <Text textAlign="center" fz="sm" fw={300}>
+                                                                                        {t('Designation')}<Text component="span" c="red">*</Text>
                                                                                     </Text>
                                                                                 </Flex>
+
                                                                             </Box>
                                                                         </Grid.Col>
                                                                         <Grid.Col span={{ base: 12, sm: 12, md: 8, lg: 8 }}>
@@ -496,7 +452,7 @@ function SignupForm() {
                                                                                     // label={t('CompanyName')}
                                                                                     placeholder={t('Designation')}
                                                                                     required={true}
-                                                                                    nextField={'email'}
+                                                                                    nextField={'companyWebsite'}
                                                                                     name={'designation'}
                                                                                     form={form}
                                                                                     mt={0}
@@ -516,12 +472,11 @@ function SignupForm() {
                                                                                     align="center"
                                                                                     direction="row"
                                                                                 >
-                                                                                    <Text
-                                                                                        ta="center" fz="sm"
-                                                                                        fw={300}>
-                                                                                        {t('CompanyWebsite')}
+                                                                                    <Text textAlign="center" fz="sm" fw={300}>
+                                                                                        {t('Company Website')}<Text component="span" c="red">*</Text>
                                                                                     </Text>
                                                                                 </Flex>
+
                                                                             </Box>
                                                                         </Grid.Col>
                                                                         <Grid.Col span={{ base: 12, sm: 12, md: 8, lg: 8 }}>
@@ -532,7 +487,7 @@ function SignupForm() {
                                                                                     placeholder={t('CompanyWebsite')}
                                                                                     required={false}
                                                                                     nextField={'companyEmail'}
-                                                                                    name={'company_website'}
+                                                                                    name={'companyWebsite'}
                                                                                     form={form}
                                                                                     mt={{ base: 1, sm: 1, md: '8', lg: '8' }}
                                                                                     id={'companyWebsite'}
@@ -565,7 +520,7 @@ function SignupForm() {
                                                                                     // label={t('CompanyEmail')}
                                                                                     placeholder={t('CompanyEmail')}
                                                                                     required={false}
-                                                                                    nextField={'twitterAccount'}
+                                                                                    nextField={'address'}
                                                                                     name={'company_email'}
                                                                                     form={form}
                                                                                     mt={{ base: 1, sm: 1, md: '8', lg: '8' }}
@@ -579,18 +534,17 @@ function SignupForm() {
                                                                     <Grid gutter={{ base: 4 }}>
                                                                         <Grid.Col span={{ base: 12, sm: 12, md: 4, lg: 4 }}>
                                                                             <Box >
+
                                                                                 <Flex
                                                                                     mih={{ base: 30, sm: 30, md: 80 }}
                                                                                     gap="md"
-                                                                                    mt={'xs'}
+                                                                                    mt={{ base: '1', sm: '1', md: 'sm', lg: 'sm' }}
                                                                                     justify="flex-start"
                                                                                     align="center"
                                                                                     direction="row"
                                                                                 >
-                                                                                    <Text
-                                                                                        fz="sm"
-                                                                                        fw={300}>
-                                                                                        {t('CompanyLogo')}
+                                                                                    <Text textAlign="center" fz="sm" fw={300}>
+                                                                                        {t('Company Logo')}<Text component="span" c="red">*</Text>
                                                                                     </Text>
                                                                                 </Flex>
                                                                             </Box>
@@ -600,7 +554,7 @@ function SignupForm() {
                                                                                 <ImageUploadDropzone
                                                                                     label={t('CompanyLogo')}
                                                                                     id={'companyLogo'}
-                                                                                    name={'ompany_logo'}
+                                                                                    name={'companyLogo'}
                                                                                     form={form}
                                                                                     required={true}
                                                                                     placeholder={t('DropCompanyLogoHere')}
@@ -622,17 +576,16 @@ function SignupForm() {
                                                                                     align="center"
                                                                                     direction="row"
                                                                                 >
-                                                                                    <Text
-                                                                                        fz="sm"
-                                                                                        fw={300}>
-                                                                                        {t('Address')}
+                                                                                    <Text textAlign="center" fz="sm" fw={300}>
+                                                                                        {t('Address')}<Text component="span" c="red">*</Text>
                                                                                     </Text>
+
                                                                                 </Flex>
                                                                             </Box>
                                                                         </Grid.Col>
                                                                         <Grid.Col span={{ base: 12, sm: 12, md: 8, lg: 8 }}>
                                                                             <Box >
-                                                                                <Box mt={{ base: 'xs', sm: 'xs', md: 'xs', lg: 'xs' }}>
+                                                                                <Box mt={{ base: '1', sm: '1', md: '1', lg: '1' }}>
                                                                                     <TextAreaForm
                                                                                         tooltip={t('Address')}
                                                                                         placeholder={t('Address')}
@@ -650,29 +603,42 @@ function SignupForm() {
                                                                 </Box>
                                                             </Box>
                                                         </Box>
-
-
-
                                                     </Grid.Col>
-
                                                 </Grid>
                                             </ScrollArea>
+
+                                        </Box>
+                                        <Box pl={`sm`} pb={{ base: 'sm', sm: 'sm', md: 'xs' }} pr={8} pt={'xs'} mt={'1'} className={'boxBackground borderRadiusAll'}  >
+                                            <Grid span={12}>
+                                                <Grid.Col >
+                                                    <Stack right align="flex-end" h={30}>
+                                                        <>
+                                                            {
+                                                                !saveCreateLoading && isOnline &&
+                                                                <Button
+                                                                    size="xs"
+                                                                    color={`red.6`}
+                                                                    type="submit"
+                                                                    id="EntityFormSubmit"
+                                                                // leftSection={<IconDeviceFloppy size={16} />}
+                                                                >
+
+                                                                    <Flex direction={`column`} gap={0}>
+                                                                        <Text fz={12} fw={400}>
+                                                                            {t("Submit")}
+                                                                        </Text>
+                                                                    </Flex>
+                                                                </Button>
+                                                            }
+                                                        </></Stack>
+                                                </Grid.Col>
+                                            </Grid>
                                         </Box>
                                     </Box>
                                 </Box>
                             </Box>
                         </Box>
                     </Grid.Col >
-                    {/* <Grid.Col span={1} >
-                        <Box bg={'white'} className={'borderRadiusAll'} pt={'16'} >
-                            <Shortcut
-                                form={form}
-                                FormSubmit={'EntityFormSubmit'}
-                                Name={'name'}
-                                inputType="select"
-                            />
-                        </Box>
-                    </Grid.Col> */}
                 </Grid >
 
             </form >
