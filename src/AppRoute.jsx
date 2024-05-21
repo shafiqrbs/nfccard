@@ -7,6 +7,7 @@ import './lang/i18next';
 
 import SignupIndex from './components/modules/sign-up/SignupIndex.jsx';
 import SignupLanding from './components/modules/sign-up/SignupLanding.jsx';
+import ViewCard from './components/modules/sign-up/ViewCard.jsx';
 function AppRoute() {
 
     return (
@@ -15,6 +16,7 @@ function AppRoute() {
             <Route path="/" element={<Layout />}>
                 <Route path='home' element={<SignupLanding />} />
                 <Route path='sign-up' element={<SignupIndex />} />
+                <Route path='view-card' element={<ViewCard />} />
             </Route>
         </Routes>
 

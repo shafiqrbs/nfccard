@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, Outlet, useLocation, useOutletContext } from "react-router-dom";
+import { Navigate, Outlet, useLocation, useOutletContext, } from "react-router-dom";
 import Header from "./Header";
-import { AppShell, Grid, Container } from "@mantine/core";
+import { AppShell, Grid, Container, Center } from "@mantine/core";
 import { useDisclosure, useViewportSize } from "@mantine/hooks";
 
 import Footer from "./Footer";
@@ -48,7 +48,7 @@ function Layout() {
     }, []);
 
     const headerHeight = 42;
-    const footerHeight = 36;
+    const footerHeight = 100;
     const mainAreaHeight = height - (headerHeight + footerHeight + 16); //default padding 20
 
     return (
@@ -61,7 +61,7 @@ function Layout() {
             >
 
                 <AppShell.Header >
-                    <Container w={{ base: 300, sm: 300, md: 800, lg: 800 }}>
+                    <Container w={{ base: '100%', sm: '100%', md: 900, lg: 1200 }} p={0}>
                         <Header
                             isOnline={isOnline}
                             navbarOpened={navbarOpened}
@@ -72,16 +72,18 @@ function Layout() {
                     </Container>
                 </AppShell.Header>
 
-                <AppShell.Main>
-                    <Container w={{ base: 300, sm: 400, md: 800, lg: 800 }}>
+                <AppShell.Main bg={'white'}>
+                    <Container w={{ base: '100%', sm: '100%', md: 1000, lg: 1200 }} p={0} mt={'1'}>
                         {
                             <Outlet context={{ isOnline, mainAreaHeight }} />
                         }
                     </Container>
                 </AppShell.Main>
                 <AppShell.Footer>
-                    <Container w={{ base: 300, sm: 400, md: 800, lg: 800 }}>
+                    <Container w={{ base: '100%', sm: '100%', md: 900, lg: 1200 }}>
+
                         <Footer />
+
                     </Container>
                 </AppShell.Footer>
 

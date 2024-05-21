@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
-import { Text, Image, useMantineTheme, Center } from "@mantine/core";
+import { Text, Image, useMantineTheme, Center, Stack } from "@mantine/core";
 
 function ImageUploadDropzone(props) {
     const { placeholder } = props;
@@ -8,7 +8,6 @@ function ImageUploadDropzone(props) {
     const theme = useMantineTheme();
 
     const handleDrop = (files) => {
-        // Ensure only one file is accepted
         if (files.length > 0) {
             setFile(files[0]);
         }
@@ -29,16 +28,33 @@ function ImageUploadDropzone(props) {
                     textAlign: 'center',
                 }}
             >
-                <Text>{placeholder}</Text>
+
+                <Center >
+
+                    {imageUrl ? (
+                        <Image
+                            h={125}
+                            w="auto"
+                            radius="md"
+                            src={imageUrl}
+                            onLoad={() => URL.revokeObjectURL(imageUrl)}
+                        />
+                    ) : (
+                        <>
+                            <Stack gap={0}>
+                                <Text>{placeholder}</Text>
+                                <Text>700*500</Text>
+                            </Stack>
+                        </>
+                    )}
+                </Center>
             </Dropzone>
-            <Center mt={'md'}>
-                {imageUrl && (
-                    <Image h={125} w={'auto'} radius="md" src={imageUrl} onLoad={() => URL.revokeObjectURL(imageUrl)} />
-                )}
-            </Center>
+
 
         </>
     );
 }
 
 export default ImageUploadDropzone;
+
+
