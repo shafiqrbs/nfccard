@@ -174,111 +174,15 @@ export default function Header({
                             >
                                 <Flex direction="column" gap={0}>
                                     <Text fz={12} fw={400}>
-                                        Sign Up
+                                        {t('SignUp')}
                                     </Text>
                                 </Flex>
                             </Button>
                         )}
                     </Group>
-                    {/* <Group>
-                        <Flex direction={`column`} align={'flex-end'} >
-                            <Button
-                                size="xs"
-                                color={`red.6`}
-                                type="submit"
-                                mt={4}
-                                id="EntityFormSubmit"
-                            // leftSection={<IconDeviceFloppy size={16} />}
-                            >
 
-                                <Flex direction={`column`} gap={0}>
-                                    <Text fz={12} fw={400}>
-                                        {t("SignUp")}
-                                    </Text>
-                                </Flex>
-                            </Button>
-                        </Flex>
-
-                    </Group>
-                    <Group>
-                        <Menu
-                            onOpen={() => setLanguageOpened(true)}
-                            onClose={() => setLanguageOpened(false)}
-                            radius="md"
-                            width="target"
-                            withinPortal
-                            withArrow arrowPosition="center"
-                        >
-                            <Menu.Target>
-                                <UnstyledButton
-                                    p={2}
-                                    className={LanguagePickerStyle.control}
-                                    data-expanded={languageOpened || undefined}
-                                >
-                                    <Group gap="xs">
-                                        <Image
-                                            src={languageSelected?.flag}
-                                            width={18}
-                                            height={18}
-                                        />
-                                        <span className={LanguagePickerStyle.label}>
-                                            {languageSelected?.label}
-                                        </span>
-                                    </Group>
-                                    <IconChevronDown
-                                        size="1rem"
-                                        className={LanguagePickerStyle.icon}
-                                        stroke={1}
-                                    />
-                                </UnstyledButton>
-                            </Menu.Target>
-                            <Menu.Dropdown p={4} className={LanguagePickerStyle.dropdown}>
-                                {languages.map((item) => (
-                                    <Menu.Item
-                                        p={4}
-                                        leftSection={
-                                            <Image src={item.flag} width={18} height={18} />
-                                        }
-                                        onClick={() => {
-                                            setLanguageSelected(item);
-                                            i18n.changeLanguage(item.value);
-                                        }}
-                                        key={item.label}
-                                    >
-                                        {item.label}
-                                    </Menu.Item>
-                                ))}
-                            </Menu.Dropdown>
-                        </Menu>
-                        <Tooltip
-                            label={fullscreen ? t("NormalScreen") : t("Fullscreen")}
-                            bg={`red.5`} withArrow
-                            position={"left"}
-                        >
-                            <ActionIcon onClick={toggle} variant="subtle" color={`red.4`}>
-                                {fullscreen ? (
-                                    <IconWindowMinimize size={24} />
-                                ) : (
-                                    <IconWindowMaximize size={24} />
-                                )}
-                            </ActionIcon>
-                        </Tooltip>
-                        <Tooltip label={t("Logout")} bg={`red.5`} withArrow position={"left"}>
-                            <ActionIcon onClick={() => logout()} variant="subtle" color={`gray.6`}>
-                                <IconLogout size={24} />
-                            </ActionIcon>
-                        </Tooltip>
-                    </Group> */}
                 </Group>
-                {/* <Spotlight
-                    actions={getSpotlightDropdownData()}
-                    nothingFound={t("NothingFound")}
-                    highlightQuery
-                    searchProps={{
-                        leftSection: <IconSearch size={'xs'} style={{ width: rem(20), height: rem(20) }} stroke={1.5} />,
-                        placeholder: t("SearchMenu"),
-                    }}
-                /> */}
+
                 <Notification
                     pos={`absolute`}
                     display={isOnline ? "none" : ""}

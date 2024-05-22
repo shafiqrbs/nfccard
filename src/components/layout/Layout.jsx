@@ -1,15 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, Outlet, useLocation, useOutletContext, } from "react-router-dom";
 import Header from "./Header";
-import { AppShell, Grid, Container, Center } from "@mantine/core";
+import { AppShell, Grid, Container, Center, Flex, Button, Image } from "@mantine/core";
+import { Carousel } from '@mantine/carousel';
 import { useDisclosure, useViewportSize } from "@mantine/hooks";
-
+import { useRef } from 'react';
+import Autoplay from 'embla-carousel-autoplay';
 import Footer from "./Footer";
 
 
 console.log(window.location.href);
+const images = [
+    'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-1.png',
+    'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-2.png',
+    'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-3.png',
+    'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-4.png',
+    'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-5.png',
+];
 
 function Layout() {
+
+    const autoplay = useRef(Autoplay({ delay: 3000 }));
+    const slides = images.map((url) => (
+        <Carousel.Slide key={url}>
+            <Image src={url} />
+        </Carousel.Slide>
+    ));
+
+
     const [mobileOpened, { toggle: toggleMobile }] = useDisclosure(false);
     const [navbarOpened, { toggle: toggleNavbar }] = useDisclosure(true);
     const [rightSidebarOpened, { toggle: toggleRightSideBar }] = useDisclosure(false);
@@ -20,7 +38,7 @@ function Layout() {
     const location = useLocation();
     const paramPath = window.location.pathname;
     if (!user) {
-        return <Navigate replace to="/login" />;
+        // return <Navigate replace to="/login" />;
     } else {
         /*let userGroup = JSON.parse(user).user_group;
 
@@ -48,8 +66,8 @@ function Layout() {
     }, []);
 
     const headerHeight = 42;
-    const footerHeight = 100;
-    const mainAreaHeight = height - (headerHeight + footerHeight + 16); //default padding 20
+    const footerHeight = 110;
+    const mainAreaHeight = height - (headerHeight + footerHeight + 5); //default padding 20
 
     return (
         <>
@@ -80,10 +98,17 @@ function Layout() {
                     </Container>
                 </AppShell.Main>
                 <AppShell.Footer>
-                    <Container w={{ base: '100%', sm: '100%', md: 900, lg: 1200 }}>
-
-                        <Footer />
-
+                    <Container w={{ base: '100%', sm: '100%', md: 900, lg: 1200 }} pt={'2'}>
+                        <Flex
+                            justify="center"
+                            align="center"
+                            direction="column"
+                            wrap="nowrap"
+                        >
+                            <Carousel plugins={[autoplay.current]} slideSize="40%" height={100} slideGap="xs" controlsOffset="sm" controlSize={10} loop dragFree withIndicators>
+                                {slides}
+                            </Carousel>
+                        </Flex>
                     </Container>
                 </AppShell.Footer>
 

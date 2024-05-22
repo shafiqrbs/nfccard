@@ -93,7 +93,7 @@ function SignupForm() {
         if (entityNewData.message === 'success') {
             notifications.show({
                 color: 'teal',
-                title: t('CreateSuccessfully'),
+                title: t('SubmitSuccessfully'),
                 icon: <IconCheck style={{ width: rem(18), height: rem(18) }} />,
                 loading: false,
                 autoClose: 700,
@@ -142,7 +142,7 @@ function SignupForm() {
                                 <Box pl={`xs`} pb={'xs'} pr={8} pt={'xs'} className={'boxBackground borderRadiusAll'}  >
                                     <Grid >
                                         <Grid.Col h={54}>
-                                            <Title order={6} mt={'xs'} pl={'6'}>{t('Welcome to Signup')}</Title>
+                                            <Title order={6} mt={'xs'} pl={'6'}>{t('WelcomeSignup')}</Title>
                                         </Grid.Col>
                                     </Grid>
                                 </Box>
@@ -155,13 +155,12 @@ function SignupForm() {
                                                     {validationMessage.name && <List.Item>{t('NameValidateMessage')}</List.Item>}
                                                     {validationMessage.companyName && <List.Item>{t('CompanyNameValidateMessage')}</List.Item>}
 
-                                                    {validationMessage.email && <List.Item>{t('email')}</List.Item>}
-                                                    {validationMessage.companyLogo && <List.Item>{t('companyLogo')}</List.Item>}
-                                                    {validationMessage.designation && <List.Item>{t('designation')}</List.Item>}
-                                                    {validationMessage.phone && <List.Item>{t('phone')}</List.Item>}
-                                                    {validationMessage.address && <List.Item>{t('address')}</List.Item>}
-                                                    {validationMessage.companyWebsite && <List.Item>{t('companyWebsite')}</List.Item>}
-                                                    {validationMessage.alternative_mobile && <List.Item>{t('AlternativeMobile')}</List.Item>}
+                                                    {validationMessage.email && <List.Item>{t('Email')}</List.Item>}
+                                                    {validationMessage.companyLogo && <List.Item>{t('CompanyLogo')}</List.Item>}
+                                                    {validationMessage.designation && <List.Item>{t('Designation')}</List.Item>}
+                                                    {validationMessage.phone && <List.Item>{t('Phone')}</List.Item>}
+                                                    {validationMessage.address && <List.Item>{t('Address')}</List.Item>}
+                                                    {validationMessage.companyWebsite && <List.Item>{t('CompanyWebsite')}</List.Item>}
                                                 </List>
                                             }></Alert>
                                         }
@@ -175,7 +174,7 @@ function SignupForm() {
                                                             <Box pl={`xs`} pb={'xs'} pr={8} pt={'xs'} className={'boxBackground borderRadiusAll'} >
                                                                 <Grid>
                                                                     <Grid.Col h={35}>
-                                                                        <Title order={6} pl={'6'}>{t('Personal Information')}</Title>
+                                                                        <Title order={6} pl={'6'}>{t('PersonalInformation')}</Title>
                                                                     </Grid.Col>
                                                                 </Grid>
                                                             </Box>
@@ -189,7 +188,7 @@ function SignupForm() {
                                                                                     align="center"
                                                                                     direction="row"
                                                                                 >
-                                                                                    <Text textAlign="center" fz="sm" fw={300}>
+                                                                                    <Text ta="center" fz="sm" fw={300}>
                                                                                         {t('Name')}<Text component="span" c="red">*</Text>
                                                                                     </Text>
                                                                                 </Flex>
@@ -220,7 +219,7 @@ function SignupForm() {
                                                                                     align="center"
                                                                                     direction="row"
                                                                                 >
-                                                                                    <Text textAlign="center" fz="sm" fw={300}>
+                                                                                    <Text ta="center" fz="sm" fw={300}>
                                                                                         {t('Email')}<Text component="span" c="red">*</Text>
                                                                                     </Text>
                                                                                 </Flex>
@@ -253,7 +252,7 @@ function SignupForm() {
                                                                                         align="center"
                                                                                         direction="row"
                                                                                     >
-                                                                                        <Text textAlign="center" fz="sm" fw={300}>
+                                                                                        <Text ta="center" fz="sm" fw={300}>
                                                                                             {t('Phone')}<Text component="span" c="red">*</Text>
                                                                                         </Text>
                                                                                     </Flex>
@@ -289,7 +288,7 @@ function SignupForm() {
                                                                                     <Text
                                                                                         ta="center" fz="sm"
                                                                                         fw={300}>
-                                                                                        {t('x(Twitter)Account')}
+                                                                                        {t('TwitterAccount')}
                                                                                     </Text>
                                                                                 </Flex>
                                                                             </Box>
@@ -297,9 +296,9 @@ function SignupForm() {
                                                                         <Grid.Col span={{ base: 12, sm: 12, md: 8, lg: 8 }}>
                                                                             <Box >
                                                                                 <InputForm
-                                                                                    tooltip={t('x(Twitter)Account')}
+                                                                                    tooltip={t('TwitterAccount')}
                                                                                     // label={t('CompanyEmail')}
-                                                                                    placeholder={t('x(Twitter)Account')}
+                                                                                    placeholder={t('TwitterAccount')}
                                                                                     required={false}
                                                                                     nextField={'linkedinAccount'}
                                                                                     name={'twitter_account'}
@@ -360,7 +359,7 @@ function SignupForm() {
                                                                                     <Text
                                                                                         fz="sm"
                                                                                         fw={300}>
-                                                                                        {t('profilePic')}
+                                                                                        {t('ProfilePic')}
                                                                                     </Text>
                                                                                 </Flex>
                                                                             </Box>
@@ -368,7 +367,7 @@ function SignupForm() {
                                                                         <Grid.Col span={{ base: 12, sm: 12, md: 8, lg: 8 }}>
                                                                             <Box mt={{ base: 'xs', sm: 'xs', md: 'xs', lg: 'xs' }}>
                                                                                 <ImageUploadDropzone
-                                                                                    label={t('profilePic')}
+                                                                                    label={t('ProfilePic')}
                                                                                     id={'profilePic'}
                                                                                     name={'profile_pic'}
                                                                                     form={form}
@@ -391,7 +390,7 @@ function SignupForm() {
                                                             <Box pl={`xs`} pb={'xs'} pr={8} pt={'xs'} className={'boxBackground borderRadiusAll'} >
                                                                 <Grid>
                                                                     <Grid.Col h={35}>
-                                                                        <Title order={6} pl={'6'}>{t('Company Information')}</Title>
+                                                                        <Title order={6} pl={'6'}>{t('CompanyInformation')}</Title>
                                                                     </Grid.Col>
                                                                 </Grid>
                                                             </Box>
@@ -405,7 +404,7 @@ function SignupForm() {
                                                                                     align="center"
                                                                                     direction="row"
                                                                                 >
-                                                                                    <Text textAlign="center" fz="sm" fw={300}>
+                                                                                    <Text ta="center" fz="sm" fw={300}>
                                                                                         {t('CompanyName')}<Text component="span" c="red">*</Text>
                                                                                     </Text>
                                                                                 </Flex>
@@ -438,7 +437,7 @@ function SignupForm() {
                                                                                     align="center"
                                                                                     direction="row"
                                                                                 >
-                                                                                    <Text textAlign="center" fz="sm" fw={300}>
+                                                                                    <Text ta="center" fz="sm" fw={300}>
                                                                                         {t('Designation')}<Text component="span" c="red">*</Text>
                                                                                     </Text>
                                                                                 </Flex>
@@ -472,8 +471,8 @@ function SignupForm() {
                                                                                     align="center"
                                                                                     direction="row"
                                                                                 >
-                                                                                    <Text textAlign="center" fz="sm" fw={300}>
-                                                                                        {t('Company Website')}<Text component="span" c="red">*</Text>
+                                                                                    <Text ta="center" fz="sm" fw={300}>
+                                                                                        {t('CompanyWebsite')}<Text component="span" c="red">*</Text>
                                                                                     </Text>
                                                                                 </Flex>
 
@@ -543,8 +542,8 @@ function SignupForm() {
                                                                                     align="center"
                                                                                     direction="row"
                                                                                 >
-                                                                                    <Text textAlign="center" fz="sm" fw={300}>
-                                                                                        {t('Company Logo')}<Text component="span" c="red">*</Text>
+                                                                                    <Text ta="center" fz="sm" fw={300}>
+                                                                                        {t('CompanyLogo')}<Text component="span" c="red">*</Text>
                                                                                     </Text>
                                                                                 </Flex>
                                                                             </Box>
@@ -576,7 +575,7 @@ function SignupForm() {
                                                                                     align="center"
                                                                                     direction="row"
                                                                                 >
-                                                                                    <Text textAlign="center" fz="sm" fw={300}>
+                                                                                    <Text ta="center" fz="sm" fw={300}>
                                                                                         {t('Address')}<Text component="span" c="red">*</Text>
                                                                                     </Text>
 
@@ -590,7 +589,7 @@ function SignupForm() {
                                                                                         tooltip={t('Address')}
                                                                                         placeholder={t('Address')}
                                                                                         required={true}
-                                                                                        nextField={''}
+                                                                                        nextField={'EntityFormSubmit'}
                                                                                         name={'address'}
                                                                                         form={form}
                                                                                         mt={{ base: 1, sm: 1, md: '8', lg: '8' }}

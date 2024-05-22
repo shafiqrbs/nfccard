@@ -30,7 +30,7 @@ export default function LoginBack() {
     const user = localStorage.getItem("user");
 
     if(user){
-        return <Navigate replace to="/"/>;
+        // return <Navigate replace to="/"/>;
     }
 
     const form = useForm({

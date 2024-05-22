@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
     Box, Button,
-    Grid, Progress, Title, Group, Burger, Menu, rem, ActionIcon, NavLink
+    Grid, Progress, Title, Group, Burger, Menu, rem, ActionIcon, NavLink,
+    Center, Flex
 } from "@mantine/core";
 import { getHotkeyHandler, useDisclosure, useHotkeys, useToggle } from "@mantine/hooks";
 import { useTranslation } from 'react-i18next';
@@ -60,14 +61,18 @@ function FooterNavbar() {
         <>
             <footer className={classes.footer} mt={'xs'} >
                 <div className={classes.inner} mt={'xs'}>
-                    <Group gap={5} className={classes.links} >
+                    {/* <Group gap={5} className={classes.links} >
                         {leftItems}
                     </Group>
                     <Group>
                         <Group ml={50} gap={5} className={classes.links} >
                             {items}
                         </Group>
-                    </Group>
+                    </Group> */}
+
+
+
+
                 </div>
             </footer>
         </>
