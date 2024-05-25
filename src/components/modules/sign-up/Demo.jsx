@@ -1,7 +1,11 @@
 import { Carousel } from '@mantine/carousel';
 import { useMediaQuery } from '@mantine/hooks';
-import { Button, Paper, Title, useMantineTheme, Text } from '@mantine/core';
+import {
+    Button, Paper, Title, useMantineTheme, Text,
+    Checkbox, Group, TextInput
+} from '@mantine/core';
 import classes from './Demo.module.css'
+import { useForm } from '@mantine/form';
 
 const data = [
     {
@@ -71,21 +75,58 @@ function Card(props) {
 function Demo() {
     const theme = useMantineTheme();
     const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
-    const slides = data.map((item) => (
-        <Carousel.Slide key={item.title}>
-            <Card {...item} />
-        </Carousel.Slide>
-    ));
+    // const slides = data.map((item) => (
+    //     <Carousel.Slide key={item.title}>
+    //         <Card {...item} />
+    //     </Carousel.Slide>
+    // ));
+
+    const form = useForm({
+        mode: 'uncontrolled',
+        initialValues: {
+            email: '',
+            termsOfService: false,
+        },
+
+        validate: {
+            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+        },
+    });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(form.getValues());
+    };
+
 
     return (
-        <Carousel
-            slideSize={{ base: '100%', sm: '50%' }}
-            slideGap={{ base: 'xl', sm: 2 }}
-            align="start"
-            slidesToScroll={mobile ? 1 : 2}
-        >
-            {slides}
-        </Carousel>
+        // <Carousel
+        //     slideSize={{ base: '100%', sm: '50%' }}
+        //     slideGap={{ base: 'xl', sm: 2 }}
+        //     align="start"
+        //     slidesToScroll={mobile ? 1 : 2}
+        // >
+        //     {slides}
+        // </Carousel>
+
+        <form onSubmit={handleSubmit}>
+            <TextInput
+                withAsterisk
+                label="Email"
+                placeholder="your@email.com"
+                {...form.getInputProps('email')}
+            />
+
+            <Checkbox
+                mt="md"
+                label="I agree to sell my privacy"
+                {...form.getInputProps('termsOfService', { type: 'checkbox' })}
+            />
+
+            <Group justify="flex-end" mt="md">
+                <Button type="submit">Submit</Button>
+            </Group>
+        </form>
     );
 }
 

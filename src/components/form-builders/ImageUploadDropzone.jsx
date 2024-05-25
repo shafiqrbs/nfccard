@@ -3,17 +3,22 @@ import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { Text, Image, useMantineTheme, Center, Stack } from "@mantine/core";
 
 function ImageUploadDropzone(props) {
-    const { placeholder } = props;
-    const [file, setFile] = useState(null);
+    const { placeholder, form, fieldName } = props;
+    const [files, setFiles] = useState([]);
     const theme = useMantineTheme();
 
-    const handleDrop = (files) => {
-        if (files.length > 0) {
-            setFile(files[0]);
-        }
+    const handleDrop = (newFiles) => {
+
+        const updatedFiles = [...files, ...newFiles];
+        setFiles(updatedFiles);
+
+        const imageUrls = updatedFiles.map(file => URL.createObjectURL(file));
+        form.setFieldValue(fieldName, imageUrls);
     };
 
-    const imageUrl = file ? URL.createObjectURL(file) : null;
+    const inputProps = form.getInputProps(fieldName);
+
+    const imageUrl = files.length > 0 ? URL.createObjectURL(files[0]) : null;
 
     return (
         <>
@@ -27,6 +32,7 @@ function ImageUploadDropzone(props) {
                     padding: '20px',
                     textAlign: 'center',
                 }}
+                {...inputProps}
             >
 
                 <Center >

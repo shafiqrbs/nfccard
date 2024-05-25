@@ -12,24 +12,39 @@ import {
     setSearchKeyword
 } from "../../../store/core/crudSlice.js";
 import { getLoadingProgress } from "../../global-hook/loading-progress/getLoadingProgress.js";
+import ViewCard from "./ViewCard.jsx";
 
-import SignupForm from "./SignupForm.jsx";
 
-function SignupIndex() {
+function SignupViewIndex({ setFormData }) {
     const { t, i18n } = useTranslation();
     const dispatch = useDispatch();
 
+    const insertType = useSelector((state) => state.crudSlice.insertType)
+    const customerFilterData = useSelector((state) => state.crudSlice.customerFilterData)
 
     const progress = getLoadingProgress()
+
+    useEffect(() => {
+        dispatch(setInsertType('create'))
+        dispatch(setSearchKeyword(''))
+        dispatch(setEntityNewData([]))
+        dispatch(setCustomerFilterData({
+            ...customerFilterData,
+            ['name']: '',
+            ['mobile']: ''
+        }))
+    }, [])
+
+    const user = localStorage.getItem("user");
 
     return (
         <>
             {progress !== 100 && <Progress color="red" size={"xs"} striped animated value={progress} />}
             {progress === 100 &&
                 <>
-
+                    {console.log(setFormData)}
                     <Box bg={'white'} p={'xs'} mt={6} className={'borderRadiusAll'}>
-                        <SignupForm />
+                        <ViewCard />
                     </Box>
                 </>
             }
@@ -38,4 +53,4 @@ function SignupIndex() {
     );
 }
 
-export default SignupIndex;
+export default SignupViewIndex;

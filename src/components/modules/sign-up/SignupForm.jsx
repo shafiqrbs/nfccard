@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { Navigate, useOutletContext } from "react-router-dom";
 import {
     Button,
     rem, Flex,
@@ -16,14 +16,11 @@ import { hasLength, useForm } from "@mantine/form";
 import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 import { setEntityNewData, setFetching, setValidationData, storeEntityData } from "../../../store/core/crudSlice.js";
-
-
 import InputForm from "../../form-builders/InputForm.jsx";
-
-import TextAreaForm from "../../form-builders/TextAreaForm";
-import getLocationDropdownData from "../../global-hook/dropdown/getLocationDropdownData.js";
-import getExecutiveDropdownData from "../../global-hook/dropdown/getExecutiveDropdownData.js";
 import ImageUploadDropzone from "../../form-builders/ImageUploadDropzone.jsx";
+import TextAreaForm from "../../form-builders/TextAreaForm";
+import { useLocalStorage } from '@mantine/hooks';
+import { useNavigate } from "react-router-dom";
 
 function SignupForm() {
     const { t, i18n } = useTranslation();
@@ -33,16 +30,12 @@ function SignupForm() {
     const [opened, { open, close }] = useDisclosure(false);
 
     const [saveCreateLoading, setSaveCreateLoading] = useState(false);
-    const [customerGroupData, setCustomerGroupData] = useState(null);
-    const [locationData, setLocationData] = useState(null);
-    const [marketingExeData, setMarketingExeData] = useState(null);
 
     const validationMessage = useSelector((state) => state.crudSlice.validationMessage)
     const validation = useSelector((state) => state.crudSlice.validation)
     const entityNewData = useSelector((state) => state.crudSlice.entityNewData)
 
-    const locationDropdown = getLocationDropdownData();
-    const executiveDropdown = getExecutiveDropdownData();
+    const navigate = useNavigate();
 
     const form = useForm({
         initialValues: {
@@ -51,12 +44,12 @@ function SignupForm() {
             phone: '',
             twitterAccount: '',
             linkedinAccount: '',
-            profilePic: [],
+            profilePic: '',
             companyName: '',
             designation: '',
             companyWebsite: '',
             companyEmail: '',
-            companyLogo: [],
+            companyLogo: '',
             address: '',
         },
         validate: {
@@ -74,7 +67,28 @@ function SignupForm() {
             companyWebsite: hasLength({ min: 2, max: 20 }),
             companyLogo: (value) => value.length === 0,
         }
+
+
     });
+
+    const [formData, setFormData] = useLocalStorage({
+        key: 'signup-form-data',
+        defaultValue: {
+            name: '',
+            email: '',
+            phone: '',
+            twitterAccount: '',
+            linkedinAccount: '',
+            profilePic: '',
+            companyName: '',
+            designation: '',
+            companyWebsite: '',
+            companyEmail: '',
+            companyLogo: '',
+            address: '',
+        },
+    });
+
     useEffect(() => {
         if (validation) {
             validationMessage.name && (form.setFieldError('name', true));
@@ -102,39 +116,22 @@ function SignupForm() {
 
             setTimeout(() => {
                 form.reset()
-                setMarketingExeData(null)
-                setCustomerGroupData(null)
-                setLocationData(null)
-                dispatch(setEntityNewData([]))
-                dispatch(setFetching(true))
+
             }, 700)
         }
     }, [validation, validationMessage, form]);
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setFormData(form.getValues()); // Store form data in local storage
+        console.log(form.getValues());
+        navigate('/sign-upView');
 
+    };
 
     return (
         <Box >
-            <form onSubmit={form.onSubmit((values) => {
-                dispatch(setValidationData(false))
-                modals.openConfirmModal({
-                    title: (
-                        <Text size="md"> {t("FormConfirmationTitle")}</Text>
-                    ),
-                    children: (
-                        <Text size="sm"> {t("FormConfirmationMessage")}</Text>
-                    ),
-                    labels: { confirm: t('Submit'), cancel: t('Cancel') }, confirmProps: { color: 'red' },
-                    onCancel: () => console.log('Cancel'),
-                    onConfirm: () => {
-                        const value = {
-                            url: 'core/customer',
-                            data: values
-                        }
-                        dispatch(storeEntityData(value))
-                    },
-                });
-            })}>
+            <form onSubmit={handleSubmit}>
                 <Grid gutter={{ base: 8 }} >
                     <Grid.Col p={'0'} >
                         <Box   >
@@ -154,7 +151,6 @@ function SignupForm() {
                                                 <List withPadding size="sm">
                                                     {validationMessage.name && <List.Item>{t('NameValidateMessage')}</List.Item>}
                                                     {validationMessage.companyName && <List.Item>{t('CompanyNameValidateMessage')}</List.Item>}
-
                                                     {validationMessage.email && <List.Item>{t('Email')}</List.Item>}
                                                     {validationMessage.companyLogo && <List.Item>{t('CompanyLogo')}</List.Item>}
                                                     {validationMessage.designation && <List.Item>{t('Designation')}</List.Item>}
@@ -164,7 +160,6 @@ function SignupForm() {
                                                 </List>
                                             }></Alert>
                                         }
-
                                         <Box mt={'xs'}>
                                             <ScrollArea h={height - 60} scrollbarSize={2} scrollbars="y" type="never"  >
                                                 <Grid columns={12} >
@@ -203,6 +198,7 @@ function SignupForm() {
                                                                                     nextField={'email'}
                                                                                     name={'name'}
                                                                                     form={form}
+                                                                                    {...form.getInputProps('name')}
                                                                                     mt={0}
                                                                                     id={'name'}
                                                                                 />
@@ -227,6 +223,8 @@ function SignupForm() {
                                                                         </Grid.Col>
                                                                         <Grid.Col span={{ base: 12, sm: 12, md: 8, lg: 8 }}>
                                                                             <Box >
+                                                                                <InputForm>
+                                                                                </InputForm>
                                                                                 <InputForm
                                                                                     tooltip={t('Email')}
                                                                                     // label={t('Email')}
@@ -235,6 +233,7 @@ function SignupForm() {
                                                                                     nextField={'phone'}
                                                                                     name={'email'}
                                                                                     form={form}
+                                                                                    {...form.getInputProps('email')}
                                                                                     mt={{ base: 1, sm: 1, md: '8', lg: '8' }}
                                                                                     id={'email'}
                                                                                 />
@@ -261,6 +260,7 @@ function SignupForm() {
                                                                         </Grid.Col>
                                                                         <Grid.Col span={{ base: 12, sm: 12, md: 8, lg: 8 }}>
                                                                             <Box >
+
                                                                                 <InputForm
                                                                                     tooltip={t('Phone')}
                                                                                     // label={t('Phone')}
@@ -269,6 +269,7 @@ function SignupForm() {
                                                                                     nextField={'twitterAccount'}
                                                                                     name={'phone'}
                                                                                     form={form}
+                                                                                    {...form.getInputProps('phone')}
                                                                                     mt={{ base: 1, sm: 1, md: '8', lg: '8' }}
                                                                                     id={'phone'}
                                                                                 />
@@ -303,6 +304,7 @@ function SignupForm() {
                                                                                     nextField={'linkedinAccount'}
                                                                                     name={'twitter_account'}
                                                                                     form={form}
+                                                                                    {...form.getInputProps('twitterAccount')}
                                                                                     mt={{ base: 1, sm: 1, md: '8', lg: '8' }}
                                                                                     id={'twitterAccount'}
                                                                                 />
@@ -337,6 +339,7 @@ function SignupForm() {
                                                                                     nextField={'companyName'}
                                                                                     name={'linkedinAccount'}
                                                                                     form={form}
+                                                                                    {...form.getInputProps('linkedinAccount')}
                                                                                     mt={{ base: 1, sm: 1, md: '8', lg: '8' }}
                                                                                     id={'linkedinAccount'}
                                                                                 />
@@ -371,6 +374,7 @@ function SignupForm() {
                                                                                     id={'profilePic'}
                                                                                     name={'profile_pic'}
                                                                                     form={form}
+                                                                                    fieldName={'profilePic'}
                                                                                     required={false}
                                                                                     placeholder={t('DropProfilePictureHere')}
                                                                                     nextField={''}
@@ -420,6 +424,7 @@ function SignupForm() {
                                                                                     nextField={'designation'}
                                                                                     name={'companyName'}
                                                                                     form={form}
+                                                                                    {...form.getInputProps('companyName')}
                                                                                     mt={0}
                                                                                     id={'companyName'}
                                                                                 />
@@ -454,6 +459,7 @@ function SignupForm() {
                                                                                     nextField={'companyWebsite'}
                                                                                     name={'designation'}
                                                                                     form={form}
+                                                                                    {...form.getInputProps('designation')}
                                                                                     mt={0}
                                                                                     id={'designation'}
                                                                                 />
@@ -488,6 +494,7 @@ function SignupForm() {
                                                                                     nextField={'companyEmail'}
                                                                                     name={'companyWebsite'}
                                                                                     form={form}
+                                                                                    {...form.getInputProps('companyWebsite')}
                                                                                     mt={{ base: 1, sm: 1, md: '8', lg: '8' }}
                                                                                     id={'companyWebsite'}
                                                                                 />
@@ -522,6 +529,7 @@ function SignupForm() {
                                                                                     nextField={'address'}
                                                                                     name={'company_email'}
                                                                                     form={form}
+                                                                                    {...form.getInputProps('companyEmail')}
                                                                                     mt={{ base: 1, sm: 1, md: '8', lg: '8' }}
                                                                                     id={'companyEmail'}
                                                                                 />
@@ -555,6 +563,7 @@ function SignupForm() {
                                                                                     id={'companyLogo'}
                                                                                     name={'companyLogo'}
                                                                                     form={form}
+                                                                                    fieldName={'companyLogo'}
                                                                                     required={true}
                                                                                     placeholder={t('DropCompanyLogoHere')}
                                                                                     nextField={'address'}
@@ -592,6 +601,7 @@ function SignupForm() {
                                                                                         nextField={'EntityFormSubmit'}
                                                                                         name={'address'}
                                                                                         form={form}
+                                                                                        {...form.getInputProps('address')}
                                                                                         mt={{ base: 1, sm: 1, md: '8', lg: '8' }}
                                                                                         id={'address'}
                                                                                     />
@@ -605,7 +615,6 @@ function SignupForm() {
                                                     </Grid.Col>
                                                 </Grid>
                                             </ScrollArea>
-
                                         </Box>
                                         <Box pl={`sm`} pb={{ base: 'sm', sm: 'sm', md: 'xs' }} pr={8} pt={'xs'} mt={'1'} className={'boxBackground borderRadiusAll'}  >
                                             <Grid span={12}>
@@ -619,6 +628,10 @@ function SignupForm() {
                                                                     color={`red.6`}
                                                                     type="submit"
                                                                     id="EntityFormSubmit"
+                                                                // onClick={(values) => {
+                                                                //     setFormData = values;
+                                                                //     console.log('Form Submitted with values:', values)
+                                                                // }}
                                                                 // leftSection={<IconDeviceFloppy size={16} />}
                                                                 >
 
