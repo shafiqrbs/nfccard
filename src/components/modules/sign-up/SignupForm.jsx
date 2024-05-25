@@ -21,6 +21,9 @@ import ImageUploadDropzone from "../../form-builders/ImageUploadDropzone.jsx";
 import TextAreaForm from "../../form-builders/TextAreaForm";
 import { useLocalStorage } from '@mantine/hooks';
 import { useNavigate } from "react-router-dom";
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
+import PhoneNumberInput from "../../form-builders/PhoneNumInput.jsx";
 
 function SignupForm() {
     const { t, i18n } = useTranslation();
@@ -223,8 +226,7 @@ function SignupForm() {
                                                                         </Grid.Col>
                                                                         <Grid.Col span={{ base: 12, sm: 12, md: 8, lg: 8 }}>
                                                                             <Box >
-                                                                                <InputForm>
-                                                                                </InputForm>
+
                                                                                 <InputForm
                                                                                     tooltip={t('Email')}
                                                                                     // label={t('Email')}
@@ -260,17 +262,16 @@ function SignupForm() {
                                                                         </Grid.Col>
                                                                         <Grid.Col span={{ base: 12, sm: 12, md: 8, lg: 8 }}>
                                                                             <Box >
-
-                                                                                <InputForm
+                                                                                <PhoneNumberInput
+                                                                                    country={'bd'}
+                                                                                    onChange={(phone) => form.setFieldValue('phone', phone)}
                                                                                     tooltip={t('Phone')}
-                                                                                    // label={t('Phone')}
                                                                                     placeholder={t('Phone')}
                                                                                     required={true}
                                                                                     nextField={'twitterAccount'}
                                                                                     name={'phone'}
                                                                                     form={form}
                                                                                     {...form.getInputProps('phone')}
-                                                                                    mt={{ base: 1, sm: 1, md: '8', lg: '8' }}
                                                                                     id={'phone'}
                                                                                 />
                                                                             </Box>
