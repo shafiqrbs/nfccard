@@ -4,7 +4,7 @@ import FooterNavbar from "./FooterNavbar";
 
 function Footer() {
   return (
-    <Box p={'0'} >
+    <Box p={0} >
       <FooterNavbar />
     </Box>
   )

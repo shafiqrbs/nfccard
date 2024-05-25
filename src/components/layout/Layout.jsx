@@ -98,17 +98,12 @@ function Layout() {
                     </Container>
                 </AppShell.Main>
                 <AppShell.Footer>
-                    <Container w={{ base: '100%', sm: '100%', md: 900, lg: 1200 }} pt={'2'}>
-                        <Flex
-                            justify="center"
-                            align="center"
-                            direction="column"
-                            wrap="nowrap"
-                        >
-                            <Carousel plugins={[autoplay.current]} slideSize="40%" height={100} slideGap="xs" controlsOffset="sm" controlSize={10} loop dragFree withIndicators>
-                                {slides}
-                            </Carousel>
-                        </Flex>
+                    <Container w={{ base: '100%', sm: '100%', md: 1000, lg: 1200 }} pt={'2'} p={0}>
+
+                        <Carousel plugins={[autoplay.current]} slideSize="40%" height={100} slideGap="xs" controlsOffset="sm" controlSize={10} loop dragFree withIndicators>
+                            {slides}
+                        </Carousel>
+
                     </Container>
                 </AppShell.Footer>
 

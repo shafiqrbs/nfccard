@@ -150,7 +150,7 @@ export default function Header({
         <>
 
             <Box bg={'white'} pos={`relative`}>
-                <Group justify="space-between" h="100%" bg={'white'} pr={'xs'} pl={'xs'} className="borderRadiusHeader">
+                <Group justify="space-between" h="100%" bg={'white'} pr={'xs'} className="borderRadiusHeader">
                     <Group>
                         <NavLink
                             href="/"
