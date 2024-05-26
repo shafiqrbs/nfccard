@@ -12,7 +12,7 @@ import 'react-phone-input-2/lib/style.css'; // Ensure this import is present
 import classes from '../../assets/css/PhoneNumberInput.module.css'
 
 function PhoneNumberInput(props) {
-    const { label, placeholder, required, nextField, name, form, tooltip, mt, id, disabled, country } = props
+    const { label, placeholder, required, nextField, name, form, tooltip, mt, id, disabled, country, rules } = props
     const { t, i18n } = useTranslation();
 
     return (
@@ -40,6 +40,7 @@ function PhoneNumberInput(props) {
                         id={id}
                         label={label}
                         placeholder={placeholder}
+                        rules={rules}
                         mt={mt}
                         disabled={disabled}
                         autoComplete="off"

@@ -9,7 +9,9 @@ import {
     Flex,
     Text,
     rem,
-    Space
+    Space,
+    Divider,
+    GridCol,
 } from "@mantine/core";
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from "react-redux";
@@ -21,7 +23,9 @@ import {
 } from "../../../store/core/crudSlice.js";
 import {
     IconMail,
-    IconPhone
+    IconPhone,
+    IconWorld,
+    IconLocation
 } from '@tabler/icons-react'
 import { getLoadingProgress } from "../../global-hook/loading-progress/getLoadingProgress.js";
 import { useLocalStorage } from '@mantine/hooks';
@@ -72,9 +76,8 @@ function ViewCard() {
                                 <Box>
                                     <Box mt={'4'} h={height - 35}>
                                         <Box h={{ base: '100%', sm: '100%' }} pr={'xs'} pl={'xs'} pt={'xs'} pb={{ base: 'sm', sm: 'sm', md: 0 }} className="borderRadiusAll">
-                                            <Container w={{ base: '100%', sm: '100%', md: 450 }}>
+                                            <Container >
                                                 <Image h={150} src={formData.companyLogo} alt="Company Logo" >
-
                                                 </Image>
                                                 <Flex
                                                     justify="center"
@@ -103,71 +106,76 @@ function ViewCard() {
                                                     </Text>
                                                 </Flex>
                                                 <Space h={'xl'} />
-                                                <Grid columns={12} gutter={{ base: 8 }}>
+                                                <Grid columns={12.1} gutter={{ base: 6 }}>
                                                     <Grid.Col span={6}>
                                                         <Flex
+                                                            mih={height - 440}
+                                                            bg="white"
+                                                            gap="xs"
                                                             justify="center"
                                                             align="center"
                                                             direction="column"
-                                                            wrap="wrap">
-                                                            <IconMail style={{ width: rem(30), height: rem(30) }}>
-                                                            </IconMail>
+                                                        >
+
+                                                            {formData.email ? (
+                                                                <IconMail style={{ width: rem(30), height: rem(30) }} />
+                                                            ) : null}
                                                             <Text
                                                                 ta="center" fz="h5" fw={500}
                                                             >
                                                                 {formData.email}
                                                             </Text>
-                                                        </Flex>
-                                                    </Grid.Col>
-                                                    <Grid.Col span={6}>
-                                                        <Flex
-                                                            justify="center"
-                                                            align="center"
-                                                            direction="column"
-                                                            wrap="wrap">
-                                                            <IconPhone style={{ width: rem(30), height: rem(30) }} />
-
+                                                            {formData.phone ? (
+                                                                <IconPhone style={{ width: rem(30), height: rem(30) }} />
+                                                            ) : null}
                                                             <Text
                                                                 ta="center" fz="h5" fw={500}
                                                             >
-                                                                {formData.phone}
+                                                                {formData.phone ? '+' + formData.phone : ''}
                                                             </Text>
+
+
+
                                                         </Flex>
                                                     </Grid.Col>
-                                                </Grid>
-                                                <Space h={'xl'} />
-                                                <Grid columns={12} gutter={{ base: 8 }}>
+                                                    <Divider size={'sm'} orientation="vertical" />
                                                     <Grid.Col span={6}>
                                                         <Flex
+                                                            mih={height - 440}
+                                                            bg="white"
+                                                            gap="xs"
                                                             justify="center"
                                                             align="center"
                                                             direction="column"
-                                                            wrap="wrap">
+                                                        >
+
+                                                            <IconWorld style={{ width: rem(30), height: rem(30) }}>
+                                                            </IconWorld>
+                                                            <Text
+                                                                ta="center" fz="h5" fw={500}
+                                                            >
+                                                                {formData.companyWebsite}
+                                                            </Text>
                                                             <IconMail style={{ width: rem(30), height: rem(30) }}>
                                                             </IconMail>
                                                             <Text
                                                                 ta="center" fz="h5" fw={500}
                                                             >
-                                                                {formData.email}
+                                                                {formData.companyEmail}
                                                             </Text>
-                                                        </Flex>
-                                                    </Grid.Col>
-                                                    <Grid.Col span={6}>
-                                                        <Flex
-                                                            justify="center"
-                                                            align="center"
-                                                            direction="column"
-                                                            wrap="wrap">
-                                                            <IconPhone style={{ width: rem(30), height: rem(30) }} />
-
+                                                            <IconLocation style={{ width: rem(30), height: rem(30) }}>
+                                                            </IconLocation>
                                                             <Text
                                                                 ta="center" fz="h5" fw={500}
                                                             >
-                                                                {formData.phone}
+                                                                {formData.address}
                                                             </Text>
                                                         </Flex>
                                                     </Grid.Col>
                                                 </Grid>
+
+
+
                                             </Container>
                                         </Box>
                                     </Box>
