@@ -3,7 +3,7 @@ import { Navigate, useOutletContext } from "react-router-dom";
 import {
     Button,
     rem, Flex,
-    Grid, Box, ScrollArea, Text, Title, Alert, List, Stack, Tooltip, ActionIcon,
+    Grid, Box, ScrollArea, Text, Title, Alert, List, Stack, Tooltip, ActionIcon, Image
 } from "@mantine/core";
 import { useTranslation } from 'react-i18next';
 import {
@@ -22,8 +22,9 @@ import TextAreaForm from "../../form-builders/TextAreaForm";
 import { useLocalStorage } from '@mantine/hooks';
 import { useNavigate } from "react-router-dom";
 import PhoneNumberInput from "../../form-builders/PhoneNumInput.jsx";
+import { readLocalStorageValue } from '@mantine/hooks';
 
-function SignupForm() {
+function SignupEditForm() {
     const { t, i18n } = useTranslation();
     const dispatch = useDispatch();
     const { isOnline, mainAreaHeight } = useOutletContext();
@@ -36,63 +37,69 @@ function SignupForm() {
     const validation = useSelector((state) => state.crudSlice.validation)
     const entityNewData = useSelector((state) => state.crudSlice.entityNewData)
 
+    const values = readLocalStorageValue({ key: 'signup-form-data' });
+
     const navigate = useNavigate();
+    const [formData, setFormData] = useLocalStorage({
+        key: 'signup-form-data',
+        defaultValue: {
+            name: values.name,
+            email: values.email,
+            phone: values.phone,
+            twitterAccount: values.twitterAccount,
+            linkedinAccount: values.linkedinAccount,
+            profilePic: values.profilePic,
+            companyName: values.companyName,
+            designation: values.designation,
+            companyWebsite: values.companyWebsite,
+            companyEmail: values.companyEmail,
+            companyLogo: values.companyLogo,
+            address: values.address,
+            instaAccount: values.instaAccount,
+            fbAccount: values.fbAccount,
+        },
+    });
 
     const form = useForm({
-        initialValues: {
-            name: '',
-            email: '',
-            phone: '',
-            twitterAccount: '',
-            linkedinAccount: '',
-            profilePic: '',
-            companyName: '',
-            designation: '',
-            companyWebsite: '',
-            companyEmail: '',
-            companyLogo: '',
-            address: '',
-            instaAccount: '',
-            fbAccount: ''
-        },
+        initialValues: formData,
         validate: {
             name: hasLength({ min: 2, max: 20 }),
             companyName: hasLength({ min: 2, max: 20 }),
             designation: hasLength({ min: 2, max: 20 }),
-            phone: (value) => (!/^\d+$/.test(value)),
+            phone: (value) => (!/^\d+$/.test(value) ? 'Invalid phone number' : null),
             email: (value) => {
                 if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                    return true;
+                    return 'Invalid email address';
                 }
                 return null;
             },
             address: hasLength({ min: 2, max: 20 }),
             companyWebsite: hasLength({ min: 2, max: 20 }),
-            companyLogo: (value) => value.length === 0,
+            companyLogo: (value) => (value.length === 0 ? 'Company logo is required' : null),
         }
-
-
     });
 
-    const [formData, setFormData] = useLocalStorage({
-        key: 'signup-form-data',
-        defaultValue: {
-            name: '',
-            email: '',
-            phone: '',
-            twitterAccount: '',
-            linkedinAccount: '',
-            profilePic: '',
-            companyName: '',
-            designation: '',
-            companyWebsite: '',
-            companyEmail: '',
-            companyLogo: '',
-            address: '',
-            instaAccount: '',
-            fbAccount: ''
-        },
-    });
+    const handleSubmit = (e) => {
+
+        e.preventDefault();
+
+        const currentFormData = form.getValues();
+
+
+        const updatedFormData = { ...formData };
+
+        Object.keys(currentFormData).forEach(key => {
+            if (currentFormData[key] !== formData[key]) {
+                updatedFormData[key] = currentFormData[key];
+
+            }
+        });
+
+        setFormData(updatedFormData);
+
+        console.log(updatedFormData);
+        navigate('/sign-upView');
+    };
 
     useEffect(() => {
         if (validation) {
@@ -126,13 +133,6 @@ function SignupForm() {
         }
     }, [validation, validationMessage, form]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setFormData(form.getValues()); // Store form data in local storage
-        console.log(form.getValues());
-        navigate('/sign-upView');
-
-    };
 
     return (
         <Box >
@@ -199,7 +199,7 @@ function SignupForm() {
                                                                                 <Box  >
                                                                                     <InputForm
                                                                                         tooltip={t('NameValidateMessage')}
-                                                                                        placeholder={t('Name')}
+                                                                                        placeholder={formData.name}
                                                                                         required={true}
                                                                                         nextField={'email'}
                                                                                         name={'name'}
@@ -233,7 +233,7 @@ function SignupForm() {
                                                                                     <InputForm
                                                                                         tooltip={t('Email')}
                                                                                         // label={t('Email')}
-                                                                                        placeholder={t('Email')}
+                                                                                        placeholder={formData.email}
                                                                                         required={true}
                                                                                         nextField={'phone'}
                                                                                         name={'email'}
@@ -269,7 +269,7 @@ function SignupForm() {
                                                                                         country={'bd'}
                                                                                         onChange={(phone) => form.setFieldValue('phone', phone)}
                                                                                         tooltip={t('Phone')}
-                                                                                        placeholder={t('Phone')}
+                                                                                        placeholder="Enter phone number"
                                                                                         required={true}
                                                                                         nextField={'twitterAccount'}
                                                                                         name={'phone'}
@@ -302,7 +302,7 @@ function SignupForm() {
                                                                                 <Box >
                                                                                     <InputForm
                                                                                         tooltip={t('TwitterAccount')}
-                                                                                        placeholder={t('TwitterAccount')}
+                                                                                        placeholder={formData.twitterAccount}
                                                                                         required={false}
                                                                                         nextField={'linkedinAccount'}
                                                                                         name={'twitterAccount'}
@@ -311,7 +311,6 @@ function SignupForm() {
                                                                                         mt={{ base: 1, sm: 1, md: '0', lg: '0' }}
                                                                                         id={'twitterAccount'}
                                                                                     />
-
                                                                                 </Box>
                                                                             </Grid.Col>
                                                                         </Grid>
@@ -337,7 +336,8 @@ function SignupForm() {
                                                                                 <Box >
                                                                                     <InputForm
                                                                                         tooltip={t('LinkedinAccount')}
-                                                                                        placeholder={t('LinkedinAccount')}
+                                                                                        // label={t('LinkedinAccount')}
+                                                                                        placeholder={formData.linkedinAccount}
                                                                                         required={false}
                                                                                         nextField={'fbAccount'}
                                                                                         name={'linkedinAccount'}
@@ -371,7 +371,7 @@ function SignupForm() {
                                                                                 <Box >
                                                                                     <InputForm
                                                                                         tooltip={t('FacebookAccount')}
-                                                                                        placeholder={t('FacebookAccount')}
+                                                                                        placeholder={formData.fbAccount}
                                                                                         required={false}
                                                                                         nextField={'instaAccount'}
                                                                                         name={'fbAccount'}
@@ -406,7 +406,7 @@ function SignupForm() {
                                                                                     <InputForm
                                                                                         tooltip={t('InstaAccount')}
                                                                                         // label={t('LinkedinAccount')}
-                                                                                        placeholder={t('InstaAccount')}
+                                                                                        placeholder={formData.instaAccount}
                                                                                         required={false}
                                                                                         nextField={'companyName'}
                                                                                         name={'instaAccount'}
@@ -448,8 +448,7 @@ function SignupForm() {
                                                                                         form={form}
                                                                                         fieldName={'profilePic'}
                                                                                         required={false}
-
-                                                                                        placeholder={t('DropProfilePictureHere')}
+                                                                                        placeholder={<Image h={rem(150)} fit="contain" src={formData.profilePic} />}
                                                                                         nextField={''}
                                                                                     />
                                                                                 </Box>
@@ -493,7 +492,7 @@ function SignupForm() {
                                                                             <Box >
                                                                                 <InputForm
                                                                                     tooltip={t('CompanyNameValidateMessage')}
-                                                                                    placeholder={t('CompanyName')}
+                                                                                    placeholder={formData.companyName}
                                                                                     required={true}
                                                                                     nextField={'designation'}
                                                                                     name={'companyName'}
@@ -528,7 +527,7 @@ function SignupForm() {
                                                                                 <InputForm
                                                                                     tooltip={t('Designation')}
                                                                                     // label={t('CompanyName')}
-                                                                                    placeholder={t('Designation')}
+                                                                                    placeholder={formData.designation}
                                                                                     required={true}
                                                                                     nextField={'companyWebsite'}
                                                                                     name={'designation'}
@@ -563,7 +562,7 @@ function SignupForm() {
                                                                                 <InputForm
                                                                                     tooltip={t('CompanyWebsite')}
                                                                                     // label={t('CompanyWebsite')}
-                                                                                    placeholder={t('CompanyWebsite')}
+                                                                                    placeholder={formData.companyWebsite}
                                                                                     required={false}
                                                                                     nextField={'companyEmail'}
                                                                                     name={'companyWebsite'}
@@ -598,7 +597,7 @@ function SignupForm() {
                                                                                 <InputForm
                                                                                     tooltip={t('CompanyEmail')}
                                                                                     // label={t('CompanyEmail')}
-                                                                                    placeholder={t('CompanyEmail')}
+                                                                                    placeholder={formData.companyEmail}
                                                                                     required={false}
                                                                                     nextField={'address'}
                                                                                     name={'companyEmail'}
@@ -639,7 +638,7 @@ function SignupForm() {
                                                                                     form={form}
                                                                                     fieldName={'companyLogo'}
                                                                                     required={true}
-                                                                                    placeholder={t('DropCompanyLogoHere')}
+                                                                                    placeholder={<Image h={rem(150)} fit="contain" src={formData.companyLogo} />}
                                                                                     nextField={'address'}
 
                                                                                 />
@@ -670,7 +669,7 @@ function SignupForm() {
                                                                                 <Box mt={{ base: '1', sm: '1', md: '6', lg: '6' }}>
                                                                                     <TextAreaForm
                                                                                         tooltip={t('Address')}
-                                                                                        placeholder={t('Address')}
+                                                                                        placeholder={formData.address}
                                                                                         required={true}
                                                                                         nextField={'EntityFormSubmit'}
                                                                                         name={'address'}
@@ -702,11 +701,9 @@ function SignupForm() {
                                                                     color={`red.6`}
                                                                     type="submit"
                                                                     id="EntityFormSubmit"
-                                                                // onClick={(values) => {
-                                                                //     setFormData = values;
-                                                                //     console.log('Form Submitted with values:', values)
+                                                                // onClick={() => {
+                                                                //     navigate('/sign-upView')
                                                                 // }}
-                                                                // leftSection={<IconDeviceFloppy size={16} />}
                                                                 >
 
                                                                     <Flex direction={`column`} gap={0}>
@@ -732,4 +729,4 @@ function SignupForm() {
     );
 }
 
-export default SignupForm;
+export default SignupEditForm;

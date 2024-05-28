@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
-import { AppShell, Container, Image } from "@mantine/core";
+import { AppShell, Container, Image, rem } from "@mantine/core";
 import { Carousel } from '@mantine/carousel';
 import { useDisclosure, useViewportSize, useLocalStorage } from "@mantine/hooks";
 import Autoplay from 'embla-carousel-autoplay';
@@ -70,7 +70,7 @@ function Layout() {
     ];
     const imageSlides = images.map((url) => (
         <Carousel.Slide key={url}>
-            <Image src={url} alt="Background" />
+            <Image src={url} alt="Background" fit="contain" />
         </Carousel.Slide>
     ));
 
@@ -97,18 +97,18 @@ function Layout() {
             padding="0"
         >
             <AppShell.Header>
-                <Container w={{ base: '100%', sm: '100%', md: 900, lg: 1200 }} p={0}>
+                <Container w={{ base: '100%', sm: '100%', md: 1000, lg: 1300 }} p={0}>
                     <Header isOnline={isOnline} />
                 </Container>
             </AppShell.Header>
 
             <AppShell.Main bg={'white'}>
-                <Container w={{ base: '100%', sm: '100%', md: 1000, lg: 1200 }} p={0} mt={'1'}>
+                <Container w={{ base: '100%', sm: '100%', md: 1000, lg: 1300 }} p={0} mt={'1'}>
                     <Outlet context={{ isOnline, mainAreaHeight }} />
                 </Container>
             </AppShell.Main>
             <AppShell.Footer>
-                <Container w={{ base: '100%', sm: '100%', md: 600, lg: 1200 }} pt={2} pr={2} pl={2} pb={2}>
+                <Container w={{ base: '100%', sm: '100%', md: 1000, lg: 1300 }} pt={2} pr={2} pl={2} pb={2}>
                     <Carousel
                         plugins={[autoplay.current]}
                         height={'100%'}
@@ -119,9 +119,11 @@ function Layout() {
                         dragFree
                         withControls={false}
                         withIndicators
-                        slideSize={{ base: '100%', sm: '50%', md: '25%' }}
+                        slideSize={{ base: '100%', sm: '100%', md: '100%' }}
+
                     >
-                        {paramPath === '/sign-upView' ? socialMediaSlides : socialMediaSlides}
+                        {/* {paramPath === '/sign-upView' ? socialMediaSlides : socialMediaSlides} */}
+                        {imageSlides}
                     </Carousel>
                 </Container>
             </AppShell.Footer>

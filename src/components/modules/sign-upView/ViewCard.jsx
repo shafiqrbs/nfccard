@@ -12,15 +12,10 @@ import {
     Space,
     Divider,
     GridCol,
+    Anchor
 } from "@mantine/core";
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from "react-redux";
-import {
-    setCustomerFilterData,
-    setEntityNewData,
-    setInsertType,
-    setSearchKeyword
-} from "../../../store/core/crudSlice.js";
 import {
     IconMail,
     IconPhone,
@@ -31,6 +26,14 @@ import { getLoadingProgress } from "../../global-hook/loading-progress/getLoadin
 import { useLocalStorage } from '@mantine/hooks';
 import { Navigate, useOutletContext } from "react-router-dom";
 import { useDisclosure, useHotkeys } from "@mantine/hooks";
+import { useNavigate } from "react-router-dom";
+import { readLocalStorageValue } from '@mantine/hooks';
+
+import facebook from '../../../assets/images/facebook.png';
+import twitter from '../../../assets/images/twitter.png';
+import linkedin from '../../../assets/images/linkedin.png';
+import instagram from '../../../assets/images/instagram.png';
+
 
 function ViewCard() {
 
@@ -38,26 +41,12 @@ function ViewCard() {
     const { t, i18n } = useTranslation();
     const dispatch = useDispatch();
     const { isOnline, mainAreaHeight } = useOutletContext();
-    const height = mainAreaHeight - 80; //TabList height 104
+    const height = mainAreaHeight - 80;
     const [opened, { open, close }] = useDisclosure(false);
+    const navigate = useNavigate();
 
-    const [formData, setFormData] = useLocalStorage({
-        key: 'signup-form-data',
-        defaultValue: {
-            name: '',
-            email: '',
-            phone: '',
-            twitterAccount: '',
-            linkedinAccount: '',
-            profilePic: [],
-            companyName: '',
-            designation: '',
-            companyWebsite: '',
-            companyEmail: '',
-            companyLogo: [],
-            address: '',
-        },
-    });
+    const formData = readLocalStorageValue({ key: 'signup-form-data' });
+
 
     return (
         <Box>
@@ -77,16 +66,22 @@ function ViewCard() {
                                     <Box mt={'4'} h={height - 35}>
                                         <Box h={{ base: '100%', sm: '100%' }} pr={'xs'} pl={'xs'} pt={'xs'} pb={{ base: 'sm', sm: 'sm', md: 0 }} className="borderRadiusAll">
                                             <Container >
-                                                <Image h={150} src={formData.companyLogo} alt="Company Logo" >
-                                                </Image>
                                                 <Flex
                                                     justify="center"
                                                     align="center"
                                                     direction="column"
                                                     wrap="wrap"
                                                 >
-                                                    <Image h={70} w={70} src={formData.profilePic} alt="Company Logo" pt={2} mt={'xs'}>
-
+                                                    <Image h={120} maw={{ sm: rem * (300), md: rem(900) }} src={formData.companyLogo} alt="Company Logo" fit="contain" >
+                                                    </Image>
+                                                </Flex>
+                                                <Flex
+                                                    justify="center"
+                                                    align="center"
+                                                    direction="column"
+                                                    wrap="wrap"
+                                                >
+                                                    <Image h={70} w={70} src={formData.profilePic} alt="Company Logo" pt={2} mt={'xs'} fit="contain">
                                                     </Image>
                                                     <Text
                                                         mt={'xs'}
@@ -116,7 +111,6 @@ function ViewCard() {
                                                             align="center"
                                                             direction="column"
                                                         >
-
                                                             {formData.email ? (
                                                                 <IconMail style={{ width: rem(30), height: rem(30) }} />
                                                             ) : null}
@@ -133,9 +127,28 @@ function ViewCard() {
                                                             >
                                                                 {formData.phone ? '+' + formData.phone : ''}
                                                             </Text>
-
-
-
+                                                            <Grid columns={12} gutter={{ base: 6 }} mt={'sm'}>
+                                                                <Grid.Col span={{ base: 12, sm: 6, md: 3 }}>
+                                                                    <Anchor href={formData.fbAccount} target="_blank" rel="noopener noreferrer" onClick={() => { console.log('link' + formData.fbAccount) }}>
+                                                                        <Image h={80} fit="contain" src={facebook} alt="Facebook" />
+                                                                    </Anchor>
+                                                                </Grid.Col>
+                                                                <Grid.Col span={{ base: 12, sm: 6, md: 3 }}>
+                                                                    <Anchor href={formData.linkedinAccount} target="_blank" rel="noopener noreferrer">
+                                                                        <Image h={80} fit="contain" src={linkedin} alt="Facebook" />
+                                                                    </Anchor>
+                                                                </Grid.Col>
+                                                                <Grid.Col span={{ base: 12, sm: 6, md: 3 }}>
+                                                                    <Anchor href={formData.instaAccount} target="_blank" rel="noopener noreferrer">
+                                                                        <Image h={80} fit="contain" src={instagram} alt="Facebook" />
+                                                                    </Anchor>
+                                                                </Grid.Col>
+                                                                <Grid.Col span={{ base: 12, sm: 6, md: 3 }}>
+                                                                    <Anchor href={formData.twitterAccount} target="_blank" rel="noopener noreferrer">
+                                                                        <Image h={80} fit="contain" src={twitter} alt="Facebook" />
+                                                                    </Anchor>
+                                                                </Grid.Col>
+                                                            </Grid>
                                                         </Flex>
                                                     </Grid.Col>
                                                     <Divider size={'sm'} orientation="vertical" />
@@ -144,7 +157,7 @@ function ViewCard() {
                                                             mih={height - 440}
                                                             bg="white"
                                                             gap="xs"
-                                                            justify="center"
+                                                            justify="flex-start"
                                                             align="center"
                                                             direction="column"
                                                         >
@@ -171,6 +184,7 @@ function ViewCard() {
                                                                 {formData.address}
                                                             </Text>
                                                         </Flex>
+
                                                     </Grid.Col>
                                                 </Grid>
 
@@ -188,18 +202,16 @@ function ViewCard() {
                                                             <Button
                                                                 size="xs"
                                                                 color={`red.6`}
-                                                                type="submit"
                                                                 id="EntityFormSubmit"
-                                                            // onClick={(values) => {
-                                                            //     setFormData = values;
-                                                            //     console.log('Form Submitted with values:', values)
-                                                            // }}
-                                                            // leftSection={<IconDeviceFloppy size={16} />}
+                                                                onClick={() => {
+                                                                    navigate('/sign-up-edit')
+                                                                }}
+
                                                             >
 
                                                                 <Flex direction={`column`} gap={0}>
                                                                     <Text fz={12} fw={400}>
-                                                                        {t("Submit")}
+                                                                        {t("Edit")}
                                                                     </Text>
                                                                 </Flex>
                                                             </Button>

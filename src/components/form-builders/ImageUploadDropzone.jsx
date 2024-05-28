@@ -1,19 +1,38 @@
 import React, { useState } from "react";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
-import { Text, Image, useMantineTheme, Center, Stack } from "@mantine/core";
+import { Text, Image, useMantineTheme, Center, Stack, rem } from "@mantine/core";
 
 function ImageUploadDropzone(props) {
-    const { placeholder, form, fieldName } = props;
+    const { placeholder, form, fieldName, placeholderSize } = props;
     const [files, setFiles] = useState([]);
+    const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
     const theme = useMantineTheme();
 
     const handleDrop = (newFiles) => {
-        // Limit to one file since multiple is false
         const file = newFiles[0];
         setFiles([file]);
 
         const imageUrl = URL.createObjectURL(file);
         form.setFieldValue(fieldName, imageUrl);
+    };
+
+    const handleImageLoad = (event) => {
+        const { width, height } = event.target;
+        const aspectRatio = width / height;
+        const desiredHeight = 125;
+
+        let newWidth;
+        let newHeight;
+
+        if (aspectRatio > 1) {
+            newWidth = desiredHeight * aspectRatio;
+            newHeight = desiredHeight;
+        } else {
+            newWidth = desiredHeight;
+            newHeight = desiredHeight / aspectRatio;
+        }
+
+        setImageDimensions({ width: newWidth, height: newHeight });
     };
 
     const inputProps = form.getInputProps(fieldName);
@@ -35,16 +54,17 @@ function ImageUploadDropzone(props) {
             <Center>
                 {imageUrl ? (
                     <Image
-                        h={125}
-                        w="auto"
+                        height={imageDimensions.height}
+                        width={imageDimensions.width}
                         radius="md"
                         src={imageUrl}
-                        onLoad={() => URL.revokeObjectURL(imageUrl)}
+                        onLoad={handleImageLoad}
+                        fit="contain"
                     />
                 ) : (
                     <Stack gap={0}>
                         <Text>{placeholder}</Text>
-                        <Text>700*500</Text>
+                        <Text>{placeholderSize}</Text>
                     </Stack>
                 )}
             </Center>
