@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
-import { AppShell, Container, Image, rem } from "@mantine/core";
+import { AppShell, Container, Image, rem, Anchor } from "@mantine/core";
 import { Carousel } from '@mantine/carousel';
 import { useDisclosure, useViewportSize, useLocalStorage } from "@mantine/hooks";
 import Autoplay from 'embla-carousel-autoplay';
@@ -12,16 +12,17 @@ import twitter from '../../assets/images/twitter.png';
 import linkedin from '../../assets/images/linkedin.png';
 import instagram from '../../assets/images/instagram.png';
 
+import Appza from '../../assets/images/Appza.jpg';
+import LazyCoders from '../../assets/images/LazyCoders.jpg';
+import LazyTasks from '../../assets/images/LazyTasks.jpg';
+import LearnSphere from '../../assets/images/LearnSphere.jpg';
+
 const images = [
-    'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-1.png',
-    'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-2.png',
-    'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-3.png',
-    'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-4.png',
-    'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-5.png',
+    Appza, LazyCoders, LazyTasks, LearnSphere
 ];
 
 function Layout() {
-    const autoplay = useRef(Autoplay({ delay: 3000 }));
+    const autoplay = useRef(Autoplay({ delay: 5000 }));
     const { height } = useViewportSize();
     const [isOnline, setNetworkStatus] = useState(navigator.onLine);
     const location = useLocation();
@@ -48,24 +49,24 @@ function Layout() {
     });
     const socialMediaSlides = [
         <Carousel.Slide key="facebook">
-            <a href={formData.facebookAccount} target="_blank" rel="noopener noreferrer">
-                <Image h={100} w={100} src={facebook} alt="Facebook" />
-            </a>
+            <Anchor href={formData.facebookAccount} target="_blank" rel="noopener noreferrer">
+                <Image h={100} fit={'contain'} src={Appza} alt="Facebook" />
+            </Anchor>
         </Carousel.Slide>,
         <Carousel.Slide key="twitter">
-            <a href={formData.twitterAccount} target="_blank" rel="noopener noreferrer">
-                <Image h={100} w={100} src={twitter} alt="Twitter" />
-            </a>
+            <Anchor href={formData.twitterAccount} target="_blank" rel="noopener noreferrer">
+                <Image h={100} fit={'contain'} src={LazyCoders} alt="Twitter" />
+            </Anchor>
         </Carousel.Slide>,
         <Carousel.Slide key="linkedin">
-            <a href={formData.linkedinAccount} target="_blank" rel="noopener noreferrer">
-                <Image h={100} w={100} src={linkedin} alt="LinkedIn" />
-            </a>
+            <Anchor href={formData.linkedinAccount} target="_blank" rel="noopener noreferrer">
+                <Image h={100} fit={'contain'} src={LazyTasks} alt="LinkedIn" />
+            </Anchor>
         </Carousel.Slide>,
         <Carousel.Slide key="instagram">
-            <a href={formData.instagramAccount} target="_blank" rel="noopener noreferrer">
-                <Image h={100} w={100} src={instagram} alt="Instagram" />
-            </a>
+            <Anchor href={formData.instagramAccount} target="_blank" rel="noopener noreferrer">
+                <Image h={100} fit={'contain'} src={LearnSphere} alt="Instagram" />
+            </Anchor>
         </Carousel.Slide>,
     ];
     const imageSlides = images.map((url) => (
@@ -118,12 +119,12 @@ function Layout() {
                         loop
                         dragFree
                         withControls={false}
-                        withIndicators
+                        withIndicators={false}
                         slideSize={{ base: '100%', sm: '100%', md: '100%' }}
 
                     >
-                        {/* {paramPath === '/sign-upView' ? socialMediaSlides : socialMediaSlides} */}
-                        {imageSlides}
+                        {paramPath === '/sign-upView' ? socialMediaSlides : socialMediaSlides}
+                        {/* {imageSlides} */}
                     </Carousel>
                 </Container>
             </AppShell.Footer>
