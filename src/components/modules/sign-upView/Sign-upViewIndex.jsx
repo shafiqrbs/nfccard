@@ -13,6 +13,7 @@ import {
 } from "../../../store/core/crudSlice.js";
 import { getLoadingProgress } from "../../global-hook/loading-progress/getLoadingProgress.js";
 import ViewCard from "./ViewCard.jsx";
+import ViewCardIndex from "./ViewCardIndex.jsx";
 
 
 function SignupViewIndex({ setFormData }) {
@@ -44,6 +45,7 @@ function SignupViewIndex({ setFormData }) {
                 <>
                     {console.log(setFormData)}
                     <Box bg={'white'} p={'xs'} mt={6} className={'borderRadiusAll'}>
+                        {/* <ViewCardIndex /> */}
                         <ViewCard />
                     </Box>
                 </>

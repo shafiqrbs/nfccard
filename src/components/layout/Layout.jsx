@@ -7,11 +7,6 @@ import { useDisclosure, useViewportSize, useLocalStorage } from "@mantine/hooks"
 import Autoplay from 'embla-carousel-autoplay';
 import Footer from "./Footer";
 
-import facebook from '../../assets/images/facebook.png';
-import twitter from '../../assets/images/twitter.png';
-import linkedin from '../../assets/images/linkedin.png';
-import instagram from '../../assets/images/instagram.png';
-
 import Appza from '../../assets/images/Appza.jpg';
 import LazyCoders from '../../assets/images/LazyCoders.jpg';
 import LazyTasks from '../../assets/images/LazyTasks.jpg';
@@ -48,27 +43,38 @@ function Layout() {
         },
     });
     const socialMediaSlides = [
-        <Carousel.Slide key="facebook">
+        <Carousel.Slide key="Appza">
             <Anchor href={formData.facebookAccount} target="_blank" rel="noopener noreferrer">
                 <Image h={100} fit={'contain'} src={Appza} alt="Facebook" />
             </Anchor>
         </Carousel.Slide>,
-        <Carousel.Slide key="twitter">
+        <Carousel.Slide key="LazyCoders">
             <Anchor href={formData.twitterAccount} target="_blank" rel="noopener noreferrer">
                 <Image h={100} fit={'contain'} src={LazyCoders} alt="Twitter" />
             </Anchor>
         </Carousel.Slide>,
-        <Carousel.Slide key="linkedin">
+        <Carousel.Slide key="LazyTasks">
             <Anchor href={formData.linkedinAccount} target="_blank" rel="noopener noreferrer">
                 <Image h={100} fit={'contain'} src={LazyTasks} alt="LinkedIn" />
             </Anchor>
         </Carousel.Slide>,
-        <Carousel.Slide key="instagram">
+        <Carousel.Slide key="LearnSphere">
             <Anchor href={formData.instagramAccount} target="_blank" rel="noopener noreferrer">
                 <Image h={100} fit={'contain'} src={LearnSphere} alt="Instagram" />
             </Anchor>
         </Carousel.Slide>,
+        <Carousel.Slide key="Appza">
+            <Anchor href={formData.facebookAccount} target="_blank" rel="noopener noreferrer">
+                <Image h={100} fit={'contain'} src={Appza} alt="Facebook" />
+            </Anchor>
+        </Carousel.Slide>,
+        <Carousel.Slide key="LazyCoders">
+            <Anchor href={formData.twitterAccount} target="_blank" rel="noopener noreferrer">
+                <Image h={100} fit={'contain'} src={LazyCoders} alt="Twitter" />
+            </Anchor>
+        </Carousel.Slide>,
     ];
+    const combinedSlides = [...socialMediaSlides, ...socialMediaSlides];
     const imageSlides = images.map((url) => (
         <Carousel.Slide key={url}>
             <Image src={url} alt="Background" fit="contain" />
@@ -98,32 +104,31 @@ function Layout() {
             padding="0"
         >
             <AppShell.Header>
-                <Container w={{ base: '100%', sm: '100%', md: 1000, lg: 1300 }} p={0}>
+                <Container w={{ base: '100%', sm: '100%', md: 1500, }} p={0}>
                     <Header isOnline={isOnline} />
                 </Container>
             </AppShell.Header>
 
             <AppShell.Main bg={'white'}>
-                <Container w={{ base: '100%', sm: '100%', md: 1000, lg: 1300 }} p={0} mt={'1'}>
+                <Container w={{ base: '100%', sm: '100%', md: 1500 }} p={0} mt={'1'}>
                     <Outlet context={{ isOnline, mainAreaHeight }} />
                 </Container>
             </AppShell.Main>
             <AppShell.Footer>
-                <Container w={{ base: '100%', sm: '100%', md: 1000, lg: 1300 }} pt={2} pr={2} pl={2} pb={2}>
+                <Container w={{ base: '100%', sm: '100%', md: 1500 }} pt={2} pr={2} pl={2} pb={2}>
                     <Carousel
                         plugins={[autoplay.current]}
                         height={'100%'}
                         slideGap="xl"
                         controlsOffset="sm"
                         controlSize={10}
-                        loop
                         dragFree
                         withControls={false}
                         withIndicators={false}
-                        slideSize={{ base: '100%', sm: '100%', md: '100%' }}
+                        slideSize={{ base: '33%' }}
 
                     >
-                        {paramPath === '/sign-upView' ? socialMediaSlides : socialMediaSlides}
+                        {paramPath === '/sign-upView' ? combinedSlides : combinedSlides}
                         {/* {imageSlides} */}
                     </Carousel>
                 </Container>

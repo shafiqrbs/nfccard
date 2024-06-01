@@ -70,7 +70,7 @@ function ViewCard() {
                                 <Box >
                                     <ScrollArea h={height - 35} scrollbarSize={2} scrollbars="y" type="never">
                                         <Box mt={'4'} >
-                                            <Box h={{ base: '100%', sm: '100%' }} pr={'xs'} pl={'xs'} pt={'xs'} pb={{ base: 'sm', sm: 'sm', md: 0 }} className="borderRadiusAll">
+                                            <Box h={{ base: '100%', sm: '100%' }} mih={height - 40} pr={'xs'} pl={'xs'} pt={'xs'} pb={{ base: 'sm', sm: 'sm', md: 0 }} className="borderRadiusAll">
                                                 <Container >
                                                     <Flex
                                                         justify="center"
