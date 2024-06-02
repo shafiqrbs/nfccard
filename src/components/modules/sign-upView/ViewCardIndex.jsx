@@ -437,7 +437,7 @@ function ViewCard() {
                                     <Grid.Col span={10} mt={'md'}>
                                         <Button
                                             fullWidth
-                                            color={`red.6`}
+                                            color={`orange.6`}
                                             type="submit"
                                             mt={4}
                                             id="EntityFormSubmit"

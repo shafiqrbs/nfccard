@@ -50,7 +50,6 @@ import flagGB from "../../assets/images/flags/gb.svg";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import getConfigData from "../global-hook/config-data/getConfigData.js";
 
 const mockdata = [
     {
@@ -107,7 +106,7 @@ export default function Header({
     const [languageSelected, setLanguageSelected] = useState(
         languages.find((item) => item.value === i18n.language)
     );
-    const configData = getConfigData()
+
 
     function logout() {
         localStorage.clear();
@@ -154,10 +153,10 @@ export default function Header({
                     <Group>
                         <NavLink
                             href="/"
-                            c={'red'}
+                            c={'orange'}
                             fw={'800'}
                             component="button"
-                            label={'LazyCoders'}
+                            label={t('LazyCoders')}
                             onClick={(e) => { setIsClicked(false); navigate('/home') }}
                         />
 
@@ -166,7 +165,7 @@ export default function Header({
                         {!isClicked && (
                             <Button
                                 size="xs"
-                                color="red.6"
+                                color="orange.6"
                                 type="submit"
                                 mt={4}
                                 id="EntityFormSubmit"

@@ -34,8 +34,8 @@
                 component="a"
                 w={'200'}
                 mt={'2'}
-                bg={'red.1'}
-                c={'red.6'}
+                bg={'orange.1'}
+                c={'orange.6'}
                 onClick={() => {
                     modals.openConfirmModal({
                         title: (

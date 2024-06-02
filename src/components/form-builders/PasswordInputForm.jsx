@@ -19,7 +19,7 @@ function PasswordInputForm(props) {
                     px={16}
                     py={2}
                     position="top-end"
-                    bg={`red.4`}
+                    bg={`orange.4`}
                     c={'white'}
                     withArrow
                     offset={2}
@@ -44,9 +44,9 @@ function PasswordInputForm(props) {
                             <Tooltip
                                 label={t("Close")}
                                 withArrow
-                                bg={`red.5`}
+                                bg={`orange.5`}
                             >
-                                <IconX color={`red`} size={16} opacity={0.5} onClick={()=>{
+                                <IconX color={`orange`} size={16} opacity={0.5} onClick={()=>{
                                     form.setFieldValue(name, '');
                                 }}/>
                             </Tooltip>

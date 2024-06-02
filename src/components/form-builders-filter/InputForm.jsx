@@ -73,8 +73,8 @@ function InputForm(props) {
                             (module === 'user' && userFilterData[name]) ||
                             (module === 'product' && productFilterData[name]) ||
                             (module === 'vendor' && vendorFilterData[name]) ? (
-                            <Tooltip label={t("Close")} withArrow bg={`red.5`}>
-                                <IconX color={`red`} size={16} opacity={0.5} onClick={() => {
+                            <Tooltip label={t("Close")} withArrow bg={`orange.5`}>
+                                <IconX color={`orange`} size={16} opacity={0.5} onClick={() => {
                                     if (module === 'customer') {
                                         dispatch(setCustomerFilterData({
                                             ...customerFilterData,

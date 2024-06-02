@@ -75,23 +75,23 @@ function Layout() {
         </Carousel.Slide>,
     ];
     const combinedSlides = [...socialMediaSlides, ...socialMediaSlides];
-    const imageSlides = images.map((url) => (
-        <Carousel.Slide key={url}>
-            <Image src={url} alt="Background" fit="contain" />
-        </Carousel.Slide>
-    ));
+    // const imageSlides = images.map((url) => (
+    //     <Carousel.Slide key={url}>
+    //         <Image src={url} alt="Background" fit="contain" />
+    //     </Carousel.Slide>
+    // ));
 
-    useEffect(() => {
-        const handleOnlineStatus = () => setNetworkStatus(true);
-        const handleOfflineStatus = () => setNetworkStatus(false);
-        window.addEventListener("online", handleOnlineStatus);
-        window.addEventListener("offline", handleOfflineStatus);
+    // useEffect(() => {
+    //     const handleOnlineStatus = () => setNetworkStatus(true);
+    //     const handleOfflineStatus = () => setNetworkStatus(false);
+    //     window.addEventListener("online", handleOnlineStatus);
+    //     window.addEventListener("offline", handleOfflineStatus);
 
-        return () => {
-            window.removeEventListener("online", handleOnlineStatus);
-            window.removeEventListener("offline", handleOfflineStatus);
-        };
-    }, []);
+    //     return () => {
+    //         window.removeEventListener("online", handleOnlineStatus);
+    //         window.removeEventListener("offline", handleOfflineStatus);
+    //     };
+    // }, []);
 
     const headerHeight = 42;
     const footerHeight = 110;

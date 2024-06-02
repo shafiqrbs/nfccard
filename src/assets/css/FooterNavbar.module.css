@@ -26,7 +26,7 @@
 
 @mixin hover {
     background-color:#ffffff;
-    color: var(--mantine-color-red-5);
+    color: var(--mantine-color-orange-5);
     text-decoration: underline;
 }
 }

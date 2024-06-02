@@ -209,7 +209,7 @@ function ViewCard() {
                                                         {
                                                             <Button
                                                                 size="xs"
-                                                                color={`red.6`}
+                                                                color={`orange.6`}
                                                                 id="EntityFormSubmit"
                                                                 onClick={() => {
                                                                     navigate('/sign-up-edit')

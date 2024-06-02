@@ -15,7 +15,7 @@ function SwitchForm(props) {
                     px={20}
                     py={3}
                     position="top-end"
-                    bg={`red.4`}
+                    bg={`orange.4`}
                     c={'white'}
                     withArrow
                     offset={2}
@@ -27,7 +27,7 @@ function SwitchForm(props) {
                         defaultChecked={defaultChecked}
                         labelPosition={position}
                         mt={mt}
-                        color="red"
+                        color="orange"
                         label={label}
                         size="md"
                         thumbIcon={
@@ -40,7 +40,7 @@ function SwitchForm(props) {
                             ) : (
                                 <IconCheck
                                     style={{ width: rem(12), height: rem(12) }}
-                                    color={theme.colors.red[6]}
+                                    color={theme.colors.orange[6]}
                                     stroke={3}
                                 />
                             )

@@ -115,7 +115,7 @@ export default function Login() {
                         py={3}
                         opened={!!form.errors.username}
                         position="top-end"
-                        color='red'
+                        color='orange'
                         withArrow
                         offset={2}
                         transitionProps={{ transition: 'pop-bottom-left', duration: 500 }}

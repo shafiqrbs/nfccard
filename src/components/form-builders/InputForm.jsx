@@ -23,7 +23,7 @@ function InputForm(props) {
                     px={16}
                     py={2}
                     position="top-end"
-                    bg={`red.4`}
+                    bg={`orange.4`}
                     c={'white'}
                     withArrow
                     offset={2}
@@ -52,10 +52,10 @@ function InputForm(props) {
                                 <Tooltip
                                     label={t("Close")}
                                     withArrow
-                                    bg={`red.1`}
-                                    c={'red.3'}
+                                    bg={`orange.1`}
+                                    c={'orange.3'}
                                 >
-                                    <IconX color={`red`} size={16} opacity={0.5} onClick={() => {
+                                    <IconX color={`orange`} size={16} opacity={0.5} onClick={() => {
                                         form.setFieldValue(name, '');
                                     }} />
                                 </Tooltip>

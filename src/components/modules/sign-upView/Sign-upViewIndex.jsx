@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
     Box,
-    Grid, Progress, Title, Container
+    Grid, Progress, Title, Container,
+    Flex
 } from "@mantine/core";
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +15,10 @@ import {
 import { getLoadingProgress } from "../../global-hook/loading-progress/getLoadingProgress.js";
 import ViewCard from "./ViewCard.jsx";
 import ViewCardIndex from "./ViewCardIndex.jsx";
+import ContactCard from "./ContactCard.jsx";
+import ContactCardPrev from "./ContactCardPrev.jsx";
+import BoldCard from "../../CardDesigns/BoldCard.jsx";
+import ElegantCard from "../../CardDesigns/ElegantCard.jsx";
 
 
 function SignupViewIndex({ setFormData }) {
@@ -44,9 +49,28 @@ function SignupViewIndex({ setFormData }) {
             {progress === 100 &&
                 <>
                     {console.log(setFormData)}
-                    <Box bg={'white'} p={'xs'} mt={6} className={'borderRadiusAll'}>
+                    <Box bg={'white'} p={'xs'} mt={6} >
                         {/* <ViewCardIndex /> */}
-                        <ViewCard />
+                        {/* <ViewCard /> */}
+                        {/* <ContactCard /> */}
+                        {/* <ContactCardPrev /> */}
+                        <Grid columns={12} gutter={{ base: 6 }} mt={'md'}>
+                            <Grid.Col span={6}>
+                                <BoldCard />
+                            </Grid.Col>
+                            <Grid.Col span={6}>
+                                <ElegantCard />
+                            </Grid.Col>
+                        </Grid>
+                        <Grid columns={12} gutter={{ base: 6 }} mt={'md'}>
+                            <Grid.Col span={6}>
+                                <BoldCard />
+                            </Grid.Col>
+                            <Grid.Col span={6}>
+                                <BoldCard />
+                            </Grid.Col>
+                        </Grid>
+
                     </Box>
                 </>
             }
