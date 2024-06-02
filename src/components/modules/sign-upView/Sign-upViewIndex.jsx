@@ -19,6 +19,7 @@ import ContactCard from "./ContactCard.jsx";
 import ContactCardPrev from "./ContactCardPrev.jsx";
 import BoldCard from "../../CardDesigns/BoldCard.jsx";
 import ElegantCard from "../../CardDesigns/ElegantCard.jsx";
+import SimpleCard from "../../CardDesigns/SimpleCard.jsx";
 
 
 function SignupViewIndex({ setFormData }) {
@@ -64,7 +65,7 @@ function SignupViewIndex({ setFormData }) {
                         </Grid>
                         <Grid columns={12} gutter={{ base: 6 }} mt={'md'}>
                             <Grid.Col span={6}>
-                                <BoldCard />
+                                <SimpleCard />
                             </Grid.Col>
                             <Grid.Col span={6}>
                                 <BoldCard />

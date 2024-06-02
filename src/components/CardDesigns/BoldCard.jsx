@@ -11,13 +11,13 @@ function BoldCard() {
                     <img
                         src={formData.companyLogo}
                         alt="Company Logo"
-                        style={{ width: '50%', height: 40, objectFit: 'contain', borderRadius: 'md' }}
+                        style={{ maxWidth: '50%', height: 40, objectFit: 'contain', borderRadius: 'md' }}
                     />
                     <Avatar
                         src={formData.profilePic}
                         size={80}
                         radius="100%"
-                        style={{ position: 'absolute', top: 10, right: '85%', transform: 'translateX(50%)', border: '3px solid white' }}
+                        style={{ position: 'absolute', top: 10, right: '85%', transform: 'translateX(50%)', border: '3px solid white', }}
                     />
                 </div>
                 <Box mt={'sm'}>

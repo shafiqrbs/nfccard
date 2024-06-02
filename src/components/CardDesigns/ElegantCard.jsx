@@ -42,16 +42,16 @@ function ElegantCard() {
                         <IconMapPin size={16} />
                     </Grid.Col>
                     <Grid.Col span={11}>
-                        <Text size="sm">{formData.address}{formData.address}</Text>
+                        <Text size="sm">{formData.address}</Text>
                     </Grid.Col>
                 </Grid>
 
             </Box>
-            <div style={{ position: 'relative', width: '100%', textAlign: 'end', marginTop: 5, marginBottom: 5 }} >
+            <div style={{ position: 'relative', width: '100%', textAlign: 'end' }} >
                 <img
                     src={formData.companyLogo}
                     alt="Company Logo"
-                    style={{ width: '100%', height: 30, objectFit: 'contain', borderRadius: 'md' }}
+                    style={{ position: 'absolute', top: -15, left: '50%', transform: 'translateY(100%)', maxWidth: '50%', height: 30, objectFit: 'contain', borderRadius: 'md', border: '1px solid white' }}
                 />
             </div>
 
