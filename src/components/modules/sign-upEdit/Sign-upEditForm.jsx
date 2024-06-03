@@ -46,17 +46,18 @@ function SignupEditForm() {
             name: values.name,
             email: values.email,
             phone: values.phone,
-            twitterAccount: values.twitterAccount,
-            linkedinAccount: values.linkedinAccount,
-            profilePic: values.profilePic,
-            companyName: values.companyName,
+            xtwitter: values.xtwitter,
+            linkedin: values.linkedin,
+            about: values.about,
+            profile_pic: values.profile_pic,
+            company_name: values.company_name,
             designation: values.designation,
-            companyWebsite: values.companyWebsite,
-            companyEmail: values.companyEmail,
-            companyLogo: values.companyLogo,
+            website: values.website,
+            company_email: values.company_email,
+            company_logo: values.company_logo,
             address: values.address,
-            instaAccount: values.instaAccount,
-            fbAccount: values.fbAccount,
+            instagram: values.instagram,
+            facebook: values.facebook,
         },
     });
 
@@ -64,18 +65,18 @@ function SignupEditForm() {
         initialValues: formData,
         validate: {
             name: hasLength({ min: 2, max: 20 }),
-            companyName: hasLength({ min: 2, max: 20 }),
+            company_name: hasLength({ min: 2, max: 20 }),
             designation: hasLength({ min: 2, max: 20 }),
-            phone: (value) => (!/^\d+$/.test(value) ? 'Invalid phone number' : null),
+            phone: (value) => (!/^\d+$/.test(value)),
             email: (value) => {
                 if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                    return 'Invalid email address';
+                    return true;
                 }
                 return null;
             },
             address: hasLength({ min: 2, max: 20 }),
-            companyWebsite: hasLength({ min: 2, max: 20 }),
-            companyLogo: (value) => (value.length === 0 ? 'Company logo is required' : null),
+            website: hasLength({ min: 2, max: 20 }),
+            company_logo: (value) => value.length === 0,
         }
     });
 
@@ -91,7 +92,6 @@ function SignupEditForm() {
         Object.keys(currentFormData).forEach(key => {
             if (currentFormData[key] !== formData[key]) {
                 updatedFormData[key] = currentFormData[key];
-
             }
         });
 
@@ -104,16 +104,14 @@ function SignupEditForm() {
     useEffect(() => {
         if (validation) {
             validationMessage.name && (form.setFieldError('name', true));
-            validationMessage.companyName && (form.setFieldError('companyName', true));
+            validationMessage.company_name && (form.setFieldError('companyName', true));
             validationMessage.phone && (form.setFieldError('phone', true));
             validationMessage.email && (form.setFieldError('email', true));
             validationMessage.designation && (form.setFieldError('designation', true));
-            validationMessage.companyWebsite && (form.setFieldError('companyWebsite', true));
+            validationMessage.website && (form.setFieldError('companyWebsite', true));
             validationMessage.address && (form.setFieldError('address', true));
-            validationMessage.credit_limit && (form.setFieldError('credit_limit', true));
-            validationMessage.companyLogo && (form.setFieldError('companyLogo', true));
-            validationMessage.alternative_mobile && (form.setFieldError('alternative_mobile', true));
-            dispatch(setValidationData(false))
+            validationMessage.company_logo && (form.setFieldError('companyLogo', true));
+
         }
 
         if (entityNewData.message === 'success') {
@@ -155,13 +153,13 @@ function SignupEditForm() {
                                             <Alert variant="light" color="red" radius="md" title={
                                                 <List withPadding size="sm">
                                                     {validationMessage.name && <List.Item>{t('NameValidateMessage')}</List.Item>}
-                                                    {validationMessage.companyName && <List.Item>{t('CompanyNameValidateMessage')}</List.Item>}
+                                                    {validationMessage.company_name && <List.Item>{t('CompanyNameValidateMessage')}</List.Item>}
                                                     {validationMessage.email && <List.Item>{t('Email')}</List.Item>}
-                                                    {validationMessage.companyLogo && <List.Item>{t('CompanyLogo')}</List.Item>}
+                                                    {validationMessage.company_logo && <List.Item>{t('CompanyLogo')}</List.Item>}
                                                     {validationMessage.designation && <List.Item>{t('Designation')}</List.Item>}
                                                     {validationMessage.phone && <List.Item>{t('Phone')}</List.Item>}
                                                     {validationMessage.address && <List.Item>{t('Address')}</List.Item>}
-                                                    {validationMessage.companyWebsite && <List.Item>{t('CompanyWebsite')}</List.Item>}
+                                                    {validationMessage.website && <List.Item>{t('CompanyWebsite')}</List.Item>}
                                                 </List>
                                             }></Alert>
                                         }
@@ -271,7 +269,7 @@ function SignupEditForm() {
                                                                                         tooltip={t('Phone')}
                                                                                         placeholder="Enter phone number"
                                                                                         required={true}
-                                                                                        nextField={'twitterAccount'}
+                                                                                        nextField={'xtwitter'}
                                                                                         name={'phone'}
                                                                                         form={form}
                                                                                         {...form.getInputProps('phone')}
@@ -302,14 +300,14 @@ function SignupEditForm() {
                                                                                 <Box >
                                                                                     <InputForm
                                                                                         tooltip={t('TwitterAccount')}
-                                                                                        placeholder={formData.twitterAccount}
+                                                                                        placeholder={formData.xtwitter}
                                                                                         required={false}
-                                                                                        nextField={'linkedinAccount'}
-                                                                                        name={'twitterAccount'}
+                                                                                        nextField={'linkedin'}
+                                                                                        name={'xtwitter'}
                                                                                         form={form}
-                                                                                        {...form.getInputProps('twitterAccount')}
+                                                                                        {...form.getInputProps('xtwitter')}
                                                                                         mt={{ base: 1, sm: 1, md: '0', lg: '0' }}
-                                                                                        id={'twitterAccount'}
+                                                                                        id={'xtwitter'}
                                                                                     />
                                                                                 </Box>
                                                                             </Grid.Col>
@@ -337,14 +335,14 @@ function SignupEditForm() {
                                                                                     <InputForm
                                                                                         tooltip={t('LinkedinAccount')}
                                                                                         // label={t('LinkedinAccount')}
-                                                                                        placeholder={formData.linkedinAccount}
+                                                                                        placeholder={formData.linkedin}
                                                                                         required={false}
-                                                                                        nextField={'fbAccount'}
-                                                                                        name={'linkedinAccount'}
+                                                                                        nextField={'facebook'}
+                                                                                        name={'linkedin'}
                                                                                         form={form}
-                                                                                        {...form.getInputProps('linkedinAccount')}
+                                                                                        {...form.getInputProps('linkedin')}
                                                                                         mt={{ base: 1, sm: 1, md: '0', lg: '0' }}
-                                                                                        id={'linkedinAccount'}
+                                                                                        id={'linkedin'}
                                                                                     />
                                                                                 </Box>
                                                                             </Grid.Col>
@@ -371,14 +369,14 @@ function SignupEditForm() {
                                                                                 <Box >
                                                                                     <InputForm
                                                                                         tooltip={t('FacebookAccount')}
-                                                                                        placeholder={formData.fbAccount}
+                                                                                        placeholder={formData.facebook}
                                                                                         required={false}
-                                                                                        nextField={'instaAccount'}
-                                                                                        name={'fbAccount'}
+                                                                                        nextField={'instagram'}
+                                                                                        name={'facebook'}
                                                                                         form={form}
-                                                                                        {...form.getInputProps('fbAccount')}
+                                                                                        {...form.getInputProps('facebook')}
                                                                                         mt={{ base: 1, sm: 1, md: '0', lg: '0' }}
-                                                                                        id={'fbAccount'}
+                                                                                        id={'facebook'}
                                                                                     />
                                                                                 </Box>
                                                                             </Grid.Col>
@@ -406,15 +404,52 @@ function SignupEditForm() {
                                                                                     <InputForm
                                                                                         tooltip={t('InstaAccount')}
                                                                                         // label={t('LinkedinAccount')}
-                                                                                        placeholder={formData.instaAccount}
+                                                                                        placeholder={formData.instagram}
                                                                                         required={false}
-                                                                                        nextField={'companyName'}
-                                                                                        name={'instaAccount'}
+                                                                                        nextField={'about'}
+                                                                                        name={'instagram'}
                                                                                         form={form}
-                                                                                        {...form.getInputProps('instaAccount')}
+                                                                                        {...form.getInputProps('instagram')}
                                                                                         mt={{ base: 1, sm: 1, md: '0', lg: '0' }}
-                                                                                        id={'instaAccount'}
+                                                                                        id={'instagram'}
                                                                                     />
+                                                                                </Box>
+                                                                            </Grid.Col>
+                                                                        </Grid>
+                                                                    </Box>
+                                                                    <Box mt={'4'}>
+                                                                        <Grid gutter={{ base: 4 }}>
+                                                                            <Grid.Col span={{ base: 12, sm: 12, md: 4, lg: 4 }}>
+                                                                                <Box >
+                                                                                    <Flex
+                                                                                        mih={{ base: 30, sm: 30, md: 70 }}
+                                                                                        gap="md"
+                                                                                        justify="flex-start"
+                                                                                        align="center"
+                                                                                        direction="row"
+                                                                                    >
+                                                                                        <Text ta="center" fz="sm" fw={300}>
+                                                                                            {t('AboutYourself')}<Text component="span" c="red">*</Text>
+                                                                                        </Text>
+
+                                                                                    </Flex>
+                                                                                </Box>
+                                                                            </Grid.Col>
+                                                                            <Grid.Col span={{ base: 12, sm: 12, md: 8, lg: 8 }}>
+                                                                                <Box >
+                                                                                    <Box mt={{ base: '1', sm: '1', md: '6', lg: '6' }}>
+                                                                                        <TextAreaForm
+                                                                                            tooltip={t('Address')}
+                                                                                            placeholder={formData.about}
+                                                                                            required={true}
+                                                                                            nextField={'company_name'}
+                                                                                            name={'about'}
+                                                                                            form={form}
+                                                                                            {...form.getInputProps('about')}
+                                                                                            mt={{ base: 1, sm: 1, md: '0', lg: '0' }}
+                                                                                            id={'about'}
+                                                                                        />
+                                                                                    </Box>
                                                                                 </Box>
                                                                             </Grid.Col>
                                                                         </Grid>
@@ -424,9 +459,9 @@ function SignupEditForm() {
                                                                             <Grid.Col span={{ base: 12, sm: 12, md: 4, lg: 4 }}>
                                                                                 <Box >
                                                                                     <Flex
-                                                                                        mih={{ base: 30, sm: 30, md: 80 }}
+                                                                                        mih={{ base: 30, sm: 30, md: 50 }}
                                                                                         gap="md"
-                                                                                        mt={{ base: '1', sm: '1', md: 'md', lg: 'md' }}
+                                                                                        mt={{ base: '1', sm: '1', md: 'sm', lg: 'sm' }}
                                                                                         justify="flex-start"
                                                                                         align="center"
                                                                                         direction="row"
@@ -446,9 +481,9 @@ function SignupEditForm() {
                                                                                         id={'profilePic'}
                                                                                         name={'profile_pic'}
                                                                                         form={form}
-                                                                                        fieldName={'profilePic'}
+                                                                                        fieldName={'profile_pic'}
                                                                                         required={false}
-                                                                                        placeholder={<Image h={rem(150)} fit="contain" src={formData.profilePic} />}
+                                                                                        placeholder={<Image h={rem(150)} fit="contain" src={formData.profile_pic} />}
                                                                                         nextField={''}
                                                                                     />
                                                                                 </Box>
@@ -492,14 +527,14 @@ function SignupEditForm() {
                                                                             <Box >
                                                                                 <InputForm
                                                                                     tooltip={t('CompanyNameValidateMessage')}
-                                                                                    placeholder={formData.companyName}
+                                                                                    placeholder={formData.company_name}
                                                                                     required={true}
                                                                                     nextField={'designation'}
-                                                                                    name={'companyName'}
+                                                                                    name={'company_name'}
                                                                                     form={form}
-                                                                                    {...form.getInputProps('companyName')}
+                                                                                    {...form.getInputProps('company_name')}
                                                                                     mt={0}
-                                                                                    id={'companyName'}
+                                                                                    id={'company_name'}
                                                                                 />
 
                                                                             </Box>
@@ -562,14 +597,14 @@ function SignupEditForm() {
                                                                                 <InputForm
                                                                                     tooltip={t('CompanyWebsite')}
                                                                                     // label={t('CompanyWebsite')}
-                                                                                    placeholder={formData.companyWebsite}
+                                                                                    placeholder={formData.website}
                                                                                     required={false}
-                                                                                    nextField={'companyEmail'}
-                                                                                    name={'companyWebsite'}
+                                                                                    nextField={'company_email'}
+                                                                                    name={'website'}
                                                                                     form={form}
-                                                                                    {...form.getInputProps('companyWebsite')}
+                                                                                    {...form.getInputProps('website')}
                                                                                     mt={{ base: 1, sm: 1, md: '0', lg: '0' }}
-                                                                                    id={'companyWebsite'}
+                                                                                    id={'website'}
                                                                                 />
                                                                             </Box>
                                                                         </Grid.Col>
@@ -597,14 +632,14 @@ function SignupEditForm() {
                                                                                 <InputForm
                                                                                     tooltip={t('CompanyEmail')}
                                                                                     // label={t('CompanyEmail')}
-                                                                                    placeholder={formData.companyEmail}
+                                                                                    placeholder={formData.company_email}
                                                                                     required={false}
                                                                                     nextField={'address'}
-                                                                                    name={'companyEmail'}
+                                                                                    name={'company_email'}
                                                                                     form={form}
-                                                                                    {...form.getInputProps('companyEmail')}
+                                                                                    {...form.getInputProps('company_email')}
                                                                                     mt={{ base: 1, sm: 1, md: '0', lg: '0' }}
-                                                                                    id={'companyEmail'}
+                                                                                    id={'company_email'}
                                                                                 />
                                                                             </Box>
                                                                         </Grid.Col>
@@ -633,12 +668,12 @@ function SignupEditForm() {
                                                                             <Box mt={'2'}>
                                                                                 <ImageUploadDropzone
                                                                                     label={t('CompanyLogo')}
-                                                                                    id={'companyLogo'}
-                                                                                    name={'companyLogo'}
+                                                                                    id={'company_logo'}
+                                                                                    name={'company_logo'}
                                                                                     form={form}
-                                                                                    fieldName={'companyLogo'}
+                                                                                    fieldName={'company_logo'}
                                                                                     required={true}
-                                                                                    placeholder={<Image h={rem(150)} fit="contain" src={formData.companyLogo} />}
+                                                                                    placeholder={<Image h={rem(150)} fit="contain" src={formData.company_logo} />}
                                                                                     nextField={'address'}
 
                                                                                 />

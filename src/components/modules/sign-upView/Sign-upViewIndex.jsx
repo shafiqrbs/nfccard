@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import {
     Box,
     Grid, Progress, Title, Container,
-    Flex
+    Flex,
+    ScrollArea
 } from "@mantine/core";
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from "react-redux";
@@ -20,27 +21,21 @@ import ContactCardPrev from "./ContactCardPrev.jsx";
 import BoldCard from "../../CardDesigns/BoldCard.jsx";
 import ElegantCard from "../../CardDesigns/ElegantCard.jsx";
 import SimpleCard from "../../CardDesigns/SimpleCard.jsx";
-
+import DesignFour from "../../CardDesigns/DesignFour.jsx";
+import DesignFive from "../../CardDesigns/DesignFive.jsx";
+import { useViewportSize } from "@mantine/hooks";
+import DesignSix from "../../CardDesigns/DesignSix.jsx";
 
 function SignupViewIndex({ setFormData }) {
     const { t, i18n } = useTranslation();
     const dispatch = useDispatch();
+    const { height, width } = useViewportSize()
 
     const insertType = useSelector((state) => state.crudSlice.insertType)
     const customerFilterData = useSelector((state) => state.crudSlice.customerFilterData)
 
     const progress = getLoadingProgress()
 
-    useEffect(() => {
-        dispatch(setInsertType('create'))
-        dispatch(setSearchKeyword(''))
-        dispatch(setEntityNewData([]))
-        dispatch(setCustomerFilterData({
-            ...customerFilterData,
-            ['name']: '',
-            ['mobile']: ''
-        }))
-    }, [])
 
     const user = localStorage.getItem("user");
 
@@ -49,30 +44,45 @@ function SignupViewIndex({ setFormData }) {
             {progress !== 100 && <Progress color="red" size={"xs"} striped animated value={progress} />}
             {progress === 100 &&
                 <>
-                    {console.log(setFormData)}
+                    {/* {console.log(setFormData)} */}
                     <Box bg={'white'} p={'xs'} mt={6} >
                         {/* <ViewCardIndex /> */}
                         {/* <ViewCard /> */}
                         {/* <ContactCard /> */}
                         {/* <ContactCardPrev /> */}
-                        <Grid columns={12} gutter={{ base: 6 }} mt={'md'}>
-                            <Grid.Col span={6}>
-                                <BoldCard />
-                            </Grid.Col>
-                            <Grid.Col span={6}>
-                                <ElegantCard />
-                            </Grid.Col>
-                        </Grid>
-                        <Grid columns={12} gutter={{ base: 6 }} mt={'md'}>
-                            <Grid.Col span={6}>
-                                <SimpleCard />
-                            </Grid.Col>
-                            <Grid.Col span={6}>
-                                <BoldCard />
-                            </Grid.Col>
-                        </Grid>
-
                     </Box>
+
+
+                    <ScrollArea h={height + 100}>
+                        <Box bg={'white'} p={'xs'} mt={6} >
+                            <Grid columns={12} gutter={{ base: 6 }} mt={'md'}>
+                                <Grid.Col span={6}>
+                                    <BoldCard />
+                                </Grid.Col>
+                                <Grid.Col span={6}>
+                                    <ElegantCard />
+                                </Grid.Col>
+                            </Grid>
+
+                            <Grid columns={12} gutter={{ base: 6 }} mt={'md'}>
+                                <Grid.Col span={6}>
+                                    <DesignFive />
+                                </Grid.Col>
+                                <Grid.Col span={6}>
+                                    <DesignSix />
+                                </Grid.Col>
+                            </Grid>
+                            <Grid columns={12} gutter={{ base: 6 }} mt={'md'}>
+                                <Grid.Col span={6}>
+                                    <SimpleCard />
+                                </Grid.Col>
+                                <Grid.Col span={6}>
+                                    <DesignFour />
+                                </Grid.Col>
+                            </Grid>
+
+                        </Box>
+                    </ScrollArea>
                 </>
             }
         </>

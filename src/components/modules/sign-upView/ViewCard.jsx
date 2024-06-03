@@ -78,7 +78,7 @@ function ViewCard() {
                                                         direction="column"
                                                         wrap="wrap"
                                                     >
-                                                        <Image h={120} maw={{ sm: rem * (300), md: rem(900) }} src={formData.companyLogo} alt="Company Logo" fit="contain" >
+                                                        <Image h={120} maw={{ sm: rem * (300), md: ('50%') }} src={formData.company_logo} alt="Company Logo" fit="contain" >
                                                         </Image>
                                                     </Flex>
                                                     <Flex
@@ -87,7 +87,7 @@ function ViewCard() {
                                                         direction="column"
                                                         wrap="wrap"
                                                     >
-                                                        <Image h={70} w={70} src={formData.profilePic} alt="Profile Pic" pt={2} mt={'xs'} fit="contain">
+                                                        <Image h={80} w={80} src={formData.profile_pic} alt="Profile Pic" pt={2} mt={'xs'} fit="contain">
                                                         </Image>
                                                         <Text
                                                             mt={'xs'}

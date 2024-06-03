@@ -12,7 +12,7 @@ function ElegantCard() {
             </Box>
             <div style={{ position: 'relative', width: '100%', textAlign: 'end' }}>
                 <Avatar
-                    src={formData.profilePic}
+                    src={formData.profile_pic}
                     size={70}
                     radius="100%"
                     style={{ position: 'absolute', top: -65, left: '90%', transform: 'translateX(-50%)', border: '1px solid white' }}
@@ -47,12 +47,13 @@ function ElegantCard() {
                 </Grid>
 
             </Box>
-            <div style={{ position: 'relative', width: '100%', textAlign: 'end' }} >
+            <div style={{ position: 'relative', width: '100%', height: 40 }}>
                 <img
-                    src={formData.companyLogo}
+                    src={formData.company_logo}
                     alt="Company Logo"
-                    style={{ position: 'absolute', top: -15, left: '50%', transform: 'translateY(100%)', maxWidth: '50%', height: 30, objectFit: 'contain', borderRadius: 'md', border: '1px solid white' }}
+                    style={{ position: 'absolute', right: "35%", height: '40px', width: '100px', objectFit: 'contain', transform: 'translateY(10%)', }}
                 />
+
             </div>
 
         </Card >

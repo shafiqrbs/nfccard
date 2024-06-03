@@ -51,7 +51,8 @@
     "react-to-print": "^2.15.1",
     "recharts": "^2.10.4",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^3.1.0"
+    "redux-thunk": "^3.1.0",
+    "vcard-creator": "^0.7.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

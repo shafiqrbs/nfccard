@@ -75,7 +75,7 @@ function ViewCard() {
                             <Card shadow="xl" pt={'lg'} pl={'lg'} pr={'lg'} pb={0} w={500} mb={0} variant="gradient"
                                 gradient={{ from: 'blue', to: 'cyan', deg: 90 }} bg='var(--mantine-color-blue-8 )'>
                                 <Flex justify='center' align='center' mt={'lg'}>
-                                    <Avatar src={formData.profilePic} size={100} radius="100%" />
+                                    <Avatar src={formData.profile_pic} size={100} radius="100%" />
                                 </Flex>
                                 <Text align="center" size="xl" weight={500} mt="md" c={'white'}>
                                     {formData.name}
@@ -86,7 +86,7 @@ function ViewCard() {
 
                                 <Grid columns={12} gutter={0} pt={'md'}>
                                     <Grid.Col span={6} style={{
-                                        border: 'none', borderTop: '1px solid var(--mantine-color-gray-4)', borderRight: '1px solid var(--mantine-color-blue-4)', borderRight: '1px solid var(--mantine-color-gray-4)', borderRadius: '0px 0 0 0',
+                                        border: 'none', borderTop: '1px solid var(--mantine-color-gray-4)', borderRight: '1px solid var(--mantine-color-gray-4)', borderRadius: '0px 0 0 0',
                                     }}>
                                         <Flex justify={'center'} align={'center'} direction={'column'}>
                                             <Flex justify='center' align='center' pt={'xs'}>
@@ -123,7 +123,7 @@ function ViewCard() {
                             <Card shadow="md" w={500} pt={0} mt={0} >
 
                                 <Text mt="md" size="sm" c={'dimmed'}>
-                                    Founder and CEO at Nice Power & IT Solution Ltd. & Director of Dhaka Chamber of Commerce and Industry.
+                                    {formData.about}
                                 </Text>
                                 <Title order={4} mt={'md'}>Personal Information</Title>
                                 <Divider my={'xs'} size={'xs'} />
@@ -412,12 +412,12 @@ function ViewCard() {
                                     </Grid.Col>
                                     <Grid.Col span={11}>
                                         <Text fw={700} mt={'md'} >
-                                            Social Media
+                                            {t('SocialMedia')}
                                         </Text>
                                     </Grid.Col>
                                 </Grid>
                                 <Flex justify={'flex-start'} align={'center'} mt={'xs'} ml={'xl'} pl={'lg'}>
-                                    <Anchor href={formData.fbAccount} target="_blank" rel="noopener noreferrer" onClick={() => { console.log('link' + formData.fbAccount) }}>
+                                    <Anchor href={formData.facebook} target="_blank" rel="noopener noreferrer" onClick={() => { console.log('link' + formData.facebook) }}>
                                         <Image h={isMobile ? 30 : 50} fit="contain" src={facebook} alt="Facebook" />
                                     </Anchor>
                                     <Anchor href={formData.linkedinAccount} target="_blank" rel="noopener noreferrer">

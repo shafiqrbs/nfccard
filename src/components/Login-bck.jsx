@@ -21,7 +21,7 @@ import axios from "axios";
 export default function LoginBack() {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate()
-    const { height, width } = useViewportSize()
+    const { height, width } = useViewportSize();
     const icon = <IconInfoCircle />;
 
     const [spinner, setSpinner] = useState(false);

@@ -1,4 +1,4 @@
-import { Card, Avatar, Text, Group, Box, Image, Divider, Flex, BackgroundImage, Grid, Container, Button, Space } from '@mantine/core';
+import { Card, Avatar, Text, Group, Box, Image, Divider, Flex, BackgroundImage, Grid, Container, Button, Space, Center } from '@mantine/core';
 import { IconPhone, IconMail, IconMapPin } from '@tabler/icons-react';
 import { readLocalStorageValue } from '@mantine/hooks';
 
@@ -9,7 +9,7 @@ function SimpleCard() {
 
             <div style={{ position: 'start', width: '100%', textAlign: 'start' }}>
                 <Avatar
-                    src={formData.profilePic}
+                    src={formData.profile_pic}
                     size={90}
                     radius="100%"
                     style={{ position: 'absolute', top: -40, left: '5%', transform: 'translateY(70%)', border: '1px solid white' }}
@@ -21,17 +21,17 @@ function SimpleCard() {
             </Flex>
             <Divider my="sm" />
             <Box>
-
-
                 <Container fluid >
                     <Space h='md'></Space>
                     <Grid columns={12} gutter={0}>
-                        <Grid.Col span={4}>
+                        <Grid.Col span={3}>
                         </Grid.Col>
-                        <Grid.Col span={8}>
+                        <Grid.Col span={9}>
                             <Grid columns={12} gutter={0}  >
                                 <Grid.Col span={2}>
-                                    <IconPhone size={16} />
+                                    <Center mt={1} >
+                                        <IconPhone size={16} />
+                                    </Center>
                                 </Grid.Col>
                                 <Grid.Col span={10}>
                                     <Text size="sm">{formData.phone}</Text>
@@ -39,7 +39,9 @@ function SimpleCard() {
                             </Grid>
                             <Grid columns={12} gutter={0}  >
                                 <Grid.Col span={2}>
-                                    <IconMail size={16} />
+                                    <Center mt={2}>
+                                        <IconMail size={16} />
+                                    </Center>
                                 </Grid.Col>
                                 <Grid.Col span={10}>
                                     <Text size="sm">{formData.email}</Text>
@@ -48,7 +50,9 @@ function SimpleCard() {
                             <Grid columns={12} gutter={0} >
                                 <Grid.Col span={2}>
 
-                                    <IconMapPin size={16} />
+                                    <Center mt={2}>
+                                        <IconMapPin size={16} />
+                                    </Center>
                                 </Grid.Col>
                                 <Grid.Col span={10}>
                                     <Text size="sm">{formData.address}</Text>
@@ -59,15 +63,14 @@ function SimpleCard() {
                     </Grid>
                 </Container>
             </Box>
-            <Box >
-                <div style={{ position: 'relative' }}>
-                    <img
-                        src={formData.companyLogo}
-                        alt="Company Logo"
-                        style={{ position: 'absolute', top: -25, left: '50%', transform: 'translateY(100%)', border: '1px solid white', objectFit: 'contain', height: 30, maxWidth: '50%' }}
-                    />
-                </div>
-            </Box>
+            <div style={{ position: 'relative', width: '100%', height: 40 }}>
+                <img
+                    src={formData.company_logo}
+                    alt="Company Logo"
+                    style={{ position: 'absolute', right: '35%', height: '40px', width: '100px', objectFit: 'contain', bottom: '-40%', marginBottom: '10px' }}
+                />
+
+            </div>
 
 
         </Card >

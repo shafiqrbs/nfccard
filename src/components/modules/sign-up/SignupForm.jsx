@@ -43,21 +43,22 @@ function SignupForm() {
             name: '',
             email: '',
             phone: '',
-            twitterAccount: '',
-            linkedinAccount: '',
-            profilePic: '',
-            companyName: '',
+            xtwitter: '',
+            linkedin: '',
+            about: '',
+            profile_pic: '',
+            company_name: '',
             designation: '',
-            companyWebsite: '',
-            companyEmail: '',
-            companyLogo: '',
+            website: '',
+            company_email: '',
+            company_logo: '',
             address: '',
-            instaAccount: '',
-            fbAccount: ''
+            instagram: '',
+            facebook: ''
         },
         validate: {
             name: hasLength({ min: 2, max: 20 }),
-            companyName: hasLength({ min: 2, max: 20 }),
+            company_name: hasLength({ min: 2, max: 20 }),
             designation: hasLength({ min: 2, max: 20 }),
             phone: (value) => (!/^\d+$/.test(value)),
             email: (value) => {
@@ -67,8 +68,8 @@ function SignupForm() {
                 return null;
             },
             address: hasLength({ min: 2, max: 20 }),
-            companyWebsite: hasLength({ min: 2, max: 20 }),
-            companyLogo: (value) => value.length === 0,
+            website: hasLength({ min: 2, max: 20 }),
+            company_logo: (value) => value.length === 0,
         }
 
 
@@ -80,32 +81,31 @@ function SignupForm() {
             name: '',
             email: '',
             phone: '',
-            twitterAccount: '',
-            linkedinAccount: '',
-            profilePic: '',
-            companyName: '',
+            xtwitter: '',
+            linkedin: '',
+            about: '',
+            profile_pic: '',
+            company_name: '',
             designation: '',
-            companyWebsite: '',
-            companyEmail: '',
-            companyLogo: '',
+            website: '',
+            company_email: '',
+            company_logo: '',
             address: '',
-            instaAccount: '',
-            fbAccount: ''
+            instagram: '',
+            facebook: ''
         },
     });
 
     useEffect(() => {
         if (validation) {
             validationMessage.name && (form.setFieldError('name', true));
-            validationMessage.companyName && (form.setFieldError('companyName', true));
+            validationMessage.company_name && (form.setFieldError('companyName', true));
             validationMessage.phone && (form.setFieldError('phone', true));
             validationMessage.email && (form.setFieldError('email', true));
             validationMessage.designation && (form.setFieldError('designation', true));
-            validationMessage.companyWebsite && (form.setFieldError('companyWebsite', true));
+            validationMessage.website && (form.setFieldError('companyWebsite', true));
             validationMessage.address && (form.setFieldError('address', true));
-            validationMessage.credit_limit && (form.setFieldError('credit_limit', true));
-            validationMessage.companyLogo && (form.setFieldError('companyLogo', true));
-            validationMessage.alternative_mobile && (form.setFieldError('alternative_mobile', true));
+            validationMessage.company_logo && (form.setFieldError('companyLogo', true));
             dispatch(setValidationData(false))
         }
 
@@ -155,18 +155,18 @@ function SignupForm() {
                                             <Alert variant="light" color="red" radius="md" title={
                                                 <List withPadding size="sm">
                                                     {validationMessage.name && <List.Item>{t('NameValidateMessage')}</List.Item>}
-                                                    {validationMessage.companyName && <List.Item>{t('CompanyNameValidateMessage')}</List.Item>}
+                                                    {validationMessage.company_name && <List.Item>{t('CompanyNameValidateMessage')}</List.Item>}
                                                     {validationMessage.email && <List.Item>{t('Email')}</List.Item>}
-                                                    {validationMessage.companyLogo && <List.Item>{t('CompanyLogo')}</List.Item>}
+                                                    {validationMessage.company_logo && <List.Item>{t('CompanyLogo')}</List.Item>}
                                                     {validationMessage.designation && <List.Item>{t('Designation')}</List.Item>}
                                                     {validationMessage.phone && <List.Item>{t('Phone')}</List.Item>}
                                                     {validationMessage.address && <List.Item>{t('Address')}</List.Item>}
-                                                    {validationMessage.companyWebsite && <List.Item>{t('CompanyWebsite')}</List.Item>}
+                                                    {validationMessage.website && <List.Item>{t('CompanyWebsite')}</List.Item>}
                                                 </List>
                                             }></Alert>
                                         }
                                         <Box mt={'4'}>
-                                            <ScrollArea h={height - 55} scrollbarSize={2} scrollbars="y" type="never"  >
+                                            <ScrollArea h={{ base: height - 10, md: height - 55 }} scrollbarSize={2} scrollbars="y" type="never"  >
                                                 <Grid columns={12} gutter={{ base: 6 }} >
                                                     {/* 1st column */}
                                                     <Grid.Col span={{ base: 12, sm: 12, md: 6, lg: 6 }}    >
@@ -271,7 +271,7 @@ function SignupForm() {
                                                                                         tooltip={t('Phone')}
                                                                                         placeholder={t('Phone')}
                                                                                         required={true}
-                                                                                        nextField={'twitterAccount'}
+                                                                                        nextField={'xtwitter'}
                                                                                         name={'phone'}
                                                                                         form={form}
                                                                                         {...form.getInputProps('phone')}
@@ -293,7 +293,7 @@ function SignupForm() {
                                                                                         <Text
                                                                                             ta="center" fz="sm"
                                                                                             fw={300}>
-                                                                                            {t('TwitterAccount')}
+                                                                                            {t('X(Twitter)Account')}
                                                                                         </Text>
                                                                                     </Flex>
                                                                                 </Box>
@@ -304,12 +304,12 @@ function SignupForm() {
                                                                                         tooltip={t('TwitterAccount')}
                                                                                         placeholder={t('TwitterAccount')}
                                                                                         required={false}
-                                                                                        nextField={'linkedinAccount'}
-                                                                                        name={'twitterAccount'}
+                                                                                        nextField={'linkedin'}
+                                                                                        name={'xtwitter'}
                                                                                         form={form}
-                                                                                        {...form.getInputProps('twitterAccount')}
+                                                                                        {...form.getInputProps('xtwitter')}
                                                                                         mt={{ base: 1, sm: 1, md: '0', lg: '0' }}
-                                                                                        id={'twitterAccount'}
+                                                                                        id={'xtwitter'}
                                                                                     />
 
                                                                                 </Box>
@@ -339,12 +339,12 @@ function SignupForm() {
                                                                                         tooltip={t('LinkedinAccount')}
                                                                                         placeholder={t('LinkedinAccount')}
                                                                                         required={false}
-                                                                                        nextField={'fbAccount'}
-                                                                                        name={'linkedinAccount'}
+                                                                                        nextField={'facebook'}
+                                                                                        name={'linkedin'}
                                                                                         form={form}
-                                                                                        {...form.getInputProps('linkedinAccount')}
+                                                                                        {...form.getInputProps('linkedin')}
                                                                                         mt={{ base: 1, sm: 1, md: '0', lg: '0' }}
-                                                                                        id={'linkedinAccount'}
+                                                                                        id={'linkedin'}
                                                                                     />
                                                                                 </Box>
                                                                             </Grid.Col>
@@ -373,12 +373,12 @@ function SignupForm() {
                                                                                         tooltip={t('FacebookAccount')}
                                                                                         placeholder={t('FacebookAccount')}
                                                                                         required={false}
-                                                                                        nextField={'instaAccount'}
-                                                                                        name={'fbAccount'}
+                                                                                        nextField={'instagram'}
+                                                                                        name={'facebook'}
                                                                                         form={form}
-                                                                                        {...form.getInputProps('fbAccount')}
+                                                                                        {...form.getInputProps('facebook')}
                                                                                         mt={{ base: 1, sm: 1, md: '0', lg: '0' }}
-                                                                                        id={'fbAccount'}
+                                                                                        id={'facebook'}
                                                                                     />
                                                                                 </Box>
                                                                             </Grid.Col>
@@ -408,13 +408,50 @@ function SignupForm() {
                                                                                         // label={t('LinkedinAccount')}
                                                                                         placeholder={t('InstaAccount')}
                                                                                         required={false}
-                                                                                        nextField={'companyName'}
-                                                                                        name={'instaAccount'}
+                                                                                        nextField={'about'}
+                                                                                        name={'instagram'}
                                                                                         form={form}
-                                                                                        {...form.getInputProps('instaAccount')}
+                                                                                        {...form.getInputProps('instagram')}
                                                                                         mt={{ base: 1, sm: 1, md: '0', lg: '0' }}
-                                                                                        id={'instaAccount'}
+                                                                                        id={'instagram'}
                                                                                     />
+                                                                                </Box>
+                                                                            </Grid.Col>
+                                                                        </Grid>
+                                                                    </Box>
+                                                                    <Box mt={'4'}>
+                                                                        <Grid gutter={{ base: 4 }}>
+                                                                            <Grid.Col span={{ base: 12, sm: 12, md: 4, lg: 4 }}>
+                                                                                <Box >
+                                                                                    <Flex
+                                                                                        mih={{ base: 30, sm: 30, md: 70 }}
+                                                                                        gap="md"
+                                                                                        justify="flex-start"
+                                                                                        align="center"
+                                                                                        direction="row"
+                                                                                    >
+                                                                                        <Text ta="center" fz="sm" fw={300}>
+                                                                                            {t('AboutYourself')}<Text component="span" c="red">*</Text>
+                                                                                        </Text>
+
+                                                                                    </Flex>
+                                                                                </Box>
+                                                                            </Grid.Col>
+                                                                            <Grid.Col span={{ base: 12, sm: 12, md: 8, lg: 8 }}>
+                                                                                <Box >
+                                                                                    <Box mt={{ base: '1', sm: '1', md: '6', lg: '6' }}>
+                                                                                        <TextAreaForm
+                                                                                            tooltip={t('Address')}
+                                                                                            placeholder={t('About Self')}
+                                                                                            required={true}
+                                                                                            nextField={'company_name'}
+                                                                                            name={'about'}
+                                                                                            form={form}
+                                                                                            {...form.getInputProps('about')}
+                                                                                            mt={{ base: 1, sm: 1, md: '0', lg: '0' }}
+                                                                                            id={'about'}
+                                                                                        />
+                                                                                    </Box>
                                                                                 </Box>
                                                                             </Grid.Col>
                                                                         </Grid>
@@ -424,9 +461,9 @@ function SignupForm() {
                                                                             <Grid.Col span={{ base: 12, sm: 12, md: 4, lg: 4 }}>
                                                                                 <Box >
                                                                                     <Flex
-                                                                                        mih={{ base: 30, sm: 30, md: 80 }}
+                                                                                        mih={{ base: 30, sm: 30, md: 50 }}
                                                                                         gap="md"
-                                                                                        mt={{ base: '1', sm: '1', md: 'md', lg: 'md' }}
+                                                                                        mt={{ base: '1', sm: '1', md: 'sm', lg: 'sm' }}
                                                                                         justify="flex-start"
                                                                                         align="center"
                                                                                         direction="row"
@@ -443,10 +480,10 @@ function SignupForm() {
                                                                                 <Box mt={{ base: 'xs', sm: 'xs', md: '2', lg: '2' }} mb={'sm'}>
                                                                                     <ImageUploadDropzone
                                                                                         label={t('ProfilePic')}
-                                                                                        id={'profilePic'}
+                                                                                        id={'profile_pic'}
                                                                                         name={'profile_pic'}
                                                                                         form={form}
-                                                                                        fieldName={'profilePic'}
+                                                                                        fieldName={'profile_pic'}
                                                                                         required={false}
 
                                                                                         placeholder={t('DropProfilePictureHere')}
@@ -496,11 +533,11 @@ function SignupForm() {
                                                                                     placeholder={t('CompanyName')}
                                                                                     required={true}
                                                                                     nextField={'designation'}
-                                                                                    name={'companyName'}
+                                                                                    name={'company_name'}
                                                                                     form={form}
-                                                                                    {...form.getInputProps('companyName')}
+                                                                                    {...form.getInputProps('company_name')}
                                                                                     mt={0}
-                                                                                    id={'companyName'}
+                                                                                    id={'company_name'}
                                                                                 />
 
                                                                             </Box>
@@ -530,7 +567,7 @@ function SignupForm() {
                                                                                     // label={t('CompanyName')}
                                                                                     placeholder={t('Designation')}
                                                                                     required={true}
-                                                                                    nextField={'companyWebsite'}
+                                                                                    nextField={'website'}
                                                                                     name={'designation'}
                                                                                     form={form}
                                                                                     {...form.getInputProps('designation')}
@@ -565,12 +602,12 @@ function SignupForm() {
                                                                                     // label={t('CompanyWebsite')}
                                                                                     placeholder={t('CompanyWebsite')}
                                                                                     required={false}
-                                                                                    nextField={'companyEmail'}
-                                                                                    name={'companyWebsite'}
+                                                                                    nextField={'company_email'}
+                                                                                    name={'website'}
                                                                                     form={form}
-                                                                                    {...form.getInputProps('companyWebsite')}
+                                                                                    {...form.getInputProps('website')}
                                                                                     mt={{ base: 1, sm: 1, md: '0', lg: '0' }}
-                                                                                    id={'companyWebsite'}
+                                                                                    id={'website'}
                                                                                 />
                                                                             </Box>
                                                                         </Grid.Col>
@@ -601,11 +638,11 @@ function SignupForm() {
                                                                                     placeholder={t('CompanyEmail')}
                                                                                     required={false}
                                                                                     nextField={'address'}
-                                                                                    name={'companyEmail'}
+                                                                                    name={'company_email'}
                                                                                     form={form}
-                                                                                    {...form.getInputProps('companyEmail')}
+                                                                                    {...form.getInputProps('company_email')}
                                                                                     mt={{ base: 1, sm: 1, md: '0', lg: '0' }}
-                                                                                    id={'companyEmail'}
+                                                                                    id={'company_email'}
                                                                                 />
                                                                             </Box>
                                                                         </Grid.Col>
@@ -617,7 +654,7 @@ function SignupForm() {
                                                                             <Box >
 
                                                                                 <Flex
-                                                                                    mih={{ base: 30, sm: 30, md: 80 }}
+                                                                                    mih={{ base: 30, sm: 30, md: 50 }}
                                                                                     gap="md"
                                                                                     mt={{ base: '1', sm: '1', md: '10', lg: '10' }}
                                                                                     justify="flex-start"
@@ -634,14 +671,13 @@ function SignupForm() {
                                                                             <Box mt={'2'}>
                                                                                 <ImageUploadDropzone
                                                                                     label={t('CompanyLogo')}
-                                                                                    id={'companyLogo'}
-                                                                                    name={'companyLogo'}
+                                                                                    id={'company_logo'}
+                                                                                    name={'company_logo'}
                                                                                     form={form}
-                                                                                    fieldName={'companyLogo'}
+                                                                                    fieldName={'company_logo'}
                                                                                     required={true}
                                                                                     placeholder={t('DropCompanyLogoHere')}
                                                                                     nextField={'address'}
-
                                                                                 />
                                                                             </Box>
                                                                         </Grid.Col>
@@ -726,7 +762,6 @@ function SignupForm() {
                         </Box>
                     </Grid.Col >
                 </Grid >
-
             </form >
         </Box >
     );

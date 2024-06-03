@@ -8,8 +8,10 @@ function ImageUploadDropzone(props) {
     const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
     const theme = useMantineTheme();
 
+
     const handleDrop = (newFiles) => {
         const file = newFiles[0];
+        console.log(file)
         setFiles([file]);
 
         const imageUrl = URL.createObjectURL(file);
