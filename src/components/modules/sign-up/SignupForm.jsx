@@ -166,11 +166,11 @@ function SignupForm() {
                                             }></Alert>
                                         }
                                         <Box mt={'4'}>
-                                            <ScrollArea h={{ base: height - 10, md: height - 55 }} scrollbarSize={2} scrollbars="y" type="never"  >
+                                            <ScrollArea h={{ base: height + 20, md: height - 30 }} scrollbarSize={2} scrollbars="y" type="never"  >
                                                 <Grid columns={12} gutter={{ base: 6 }} >
                                                     {/* 1st column */}
                                                     <Grid.Col span={{ base: 12, sm: 12, md: 6, lg: 6 }}    >
-                                                        <Box h={{ base: '100%', sm: '100%', md: height - 60 }} pl={`4`} pr={4} pt={'4'} pb={{ base: 'sm', sm: 'sm', md: 0 }} className="borderRadiusAll">
+                                                        <Box h={{ base: '100%', sm: '100%', md: height + 85 }} pl={`4`} pr={4} pt={'4'} pb={{ base: 'sm', sm: 'sm', md: 0 }} className="borderRadiusAll">
                                                             <Box pl={`xs`} pb={'xs'} pr={8} pt={'xs'} className={'boxBackground borderRadiusAll'} >
                                                                 <Grid>
                                                                     <Grid.Col h={35}>
@@ -501,7 +501,7 @@ function SignupForm() {
 
                                                     <Grid.Col span={{ base: 12, sm: 12, md: 6, lg: 6 }} >
 
-                                                        <Box h={{ base: 'auto', sm: 'auto', md: height - 60 }} pl={`4`} pr={4} pt={'4'} pb={{ base: 'sm', sm: 'sm', md: 0 }} className="borderRadiusAll">
+                                                        <Box h={{ base: 'auto', sm: 'auto', md: height + 85 }} pl={`4`} pr={4} pt={'4'} pb={{ base: 'sm', sm: 'sm', md: 0 }} className="borderRadiusAll">
                                                             <Box pl={`xs`} pb={'xs'} pr={8} pt={'xs'} className={'boxBackground borderRadiusAll'} >
                                                                 <Grid>
                                                                     <Grid.Col h={35}>
@@ -726,10 +726,10 @@ function SignupForm() {
                                                 </Grid>
                                             </ScrollArea>
                                         </Box>
-                                        <Box pl={`sm`} pb={{ base: 'sm', sm: 'sm', md: 'xs' }} pr={8} pt={'xs'} mt={'1'} className={'boxBackground borderRadiusAll'}  >
+                                        <Box pl={`sm`} pb={{ base: 'sm', sm: 'sm', md: 'xs' }} pr={8} pt={'xs'} className={'boxBackground borderRadiusAll'}  >
                                             <Grid span={12}>
                                                 <Grid.Col >
-                                                    <Stack right align="flex-end" h={30}>
+                                                    <Stack right align="flex-end" h={25}>
                                                         <>
                                                             {
                                                                 !saveCreateLoading && isOnline &&

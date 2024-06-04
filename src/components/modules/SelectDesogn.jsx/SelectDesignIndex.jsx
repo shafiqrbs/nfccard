@@ -44,16 +44,7 @@ function SignupViewIndex({ setFormData }) {
             {progress !== 100 && <Progress color="red" size={"xs"} striped animated value={progress} />}
             {progress === 100 &&
                 <>
-                    {/* {console.log(setFormData)} */}
-                    <Box bg={'white'} p={0} pt={2}>
-                        <ViewCardIndex />
-                        {/* <ViewCard /> */}
-                        {/* <ContactCard /> */}
-                        {/* <ContactCardPrev /> */}
-                    </Box>
-
-
-                    {/* <ScrollArea h={height + 100}>
+                    <ScrollArea h={height}>
                         <Box bg={'white'} p={'xs'} mt={6} >
                             <Grid columns={12} gutter={{ base: 6 }} mt={'md'}>
                                 <Grid.Col span={6}>
@@ -82,7 +73,7 @@ function SignupViewIndex({ setFormData }) {
                             </Grid>
 
                         </Box>
-                    </ScrollArea> */}
+                    </ScrollArea>
                 </>
             }
         </>

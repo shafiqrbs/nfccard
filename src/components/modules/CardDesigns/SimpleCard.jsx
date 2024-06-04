@@ -21,7 +21,7 @@ function SimpleCard() {
             </Flex>
             <Divider my="sm" />
             <Box>
-                <Container fluid >
+                <Container fluid mb={'xs'}>
                     <Space h='md'></Space>
                     <Grid columns={12} gutter={0}>
                         <Grid.Col span={3}>
@@ -67,7 +67,7 @@ function SimpleCard() {
                 <img
                     src={formData.company_logo}
                     alt="Company Logo"
-                    style={{ position: 'absolute', right: '35%', height: '40px', width: '100px', objectFit: 'contain', bottom: '-40%', marginBottom: '10px' }}
+                    style={{ position: 'absolute', right: '25%', height: '40px', width: '50%', objectFit: 'contain', bottom: '-50%', marginBottom: '10px' }}
                 />
 
             </div>

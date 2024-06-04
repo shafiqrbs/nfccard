@@ -45,17 +45,17 @@ function Layout() {
 
         <Carousel.Slide key={LearnSphere}>
             <Anchor href={formData.instagramAccount} target="_blank" rel="noopener noreferrer">
-                <Image h={{ base: 45, md: 100 }} fit={'contain'} src={LearnSphere} alt="Instagram" />
+                <Image h={{ base: 50, md: 80 }} fit={'contain'} src={LearnSphere} alt="Instagram" mt={{ md: 'xs' }} />
             </Anchor>
         </Carousel.Slide>,
         <Carousel.Slide key={Appza}>
             <Anchor href={formData.facebookAccount} target="_blank" rel="noopener noreferrer">
-                <Image h={{ base: 45, md: 100 }} fit={'contain'} src={Appza} alt="Facebook" />
+                <Image h={{ base: 50, md: 80 }} fit={'contain'} src={Appza} alt="Facebook" mt={{ md: 'sm' }} />
             </Anchor>
         </Carousel.Slide>,
         <Carousel.Slide key={LazyTasks}>
             <Anchor href={formData.linkedinAccount} target="_blank" rel="noopener noreferrer">
-                <Image h={{ base: 45, md: 100 }} fit={'contain'} src={LazyTasks} alt="LinkedIn" />
+                <Image h={{ base: 50, md: 80 }} fit={'contain'} src={LazyTasks} alt="LinkedIn" mt={{ md: 'xs' }} />
             </Anchor>
         </Carousel.Slide>,
     ];

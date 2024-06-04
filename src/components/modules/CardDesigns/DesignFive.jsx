@@ -5,7 +5,7 @@ function DesignFive() {
 
     const formData = readLocalStorageValue({ key: 'signup-form-data' });
     return (
-        <Card shadow="lg" padding="lg" radius="md" style={{ width: '60mm', height: '100mm', backgroundColor: '#F8F9FA' }}>
+        <Card shadow="lg" padding="lg" radius="md" style={{ width: '63mm', height: '100mm', backgroundColor: '#F8F9FA' }}>
 
             <Box sx={{ textAlign: 'center' }}>
                 <Center >
@@ -17,11 +17,12 @@ function DesignFive() {
                     />
                 </Center>
             </Box>
-            <Box textAlign="center" mt={'xl'}>
+            <Box ta="center" mt={'xl'}>
                 <Text weight={700} size="md" color="#343A40">{formData.name}</Text>
-                <Text color="dimmed" size="sm">{formData.designation}</Text>
+                <Text c="dimmed" size="sm">{formData.designation}</Text>
             </Box>
             <Divider my="sm" />
+            <Space h={'sm'}></Space>
             <Box >
                 <Grid columns={12} gutter={1}>
                     <Grid.Col span={1}>
@@ -50,14 +51,15 @@ function DesignFive() {
             </Box>
 
             <Stack
-                mt={'lg'}
+                mt={'xs'}
                 align="center"
                 justify="flex-end"
+
 
             >
                 <Box sx={{ textAlign: 'center', backgroundColor: '#343A40' }}>
                     <Center >
-                        <Image src={formData.company_logo} height={80} fit="contain" alt="Company Logo" maw={'70%'} />
+                        <Image pb={'xs'} src={formData.company_logo} height={90} fit="contain" alt="Company Logo" maw={'80%'} />
                     </Center>
                 </Box>
             </Stack>

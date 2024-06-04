@@ -5,7 +5,7 @@ import { readLocalStorageValue } from '@mantine/hooks';
 function DesignFour() {
     const formData = readLocalStorageValue({ key: 'signup-form-data' });
     return (
-        <Card shadow="sm" padding="lg" radius="md" style={{ width: '100mm', height: '60mm' }}>
+        <Card shadow="sm" padding="lg" radius="md" style={{ width: '100mm', height: '60mm' }} >
             <Group justify='space-between' mb="sm">
                 <Avatar
                     src={formData.profile_pic}
@@ -18,12 +18,13 @@ function DesignFour() {
                     maw={'50%'}
                     fit="contain"
                     alt="Company Logo"
+                    pb={'lg'}
                 />
             </Group>
-            <Box textAlign="center">
+            <Flex justify="flex-start" align='flex-start' direction='column'>
                 <Text weight={700} size="md">{formData.name}</Text>
-                <Text color="dimmed" size="sm">{formData.designation}</Text>
-            </Box>
+                <Text c="dimmed" size="sm">{formData.designation}</Text>
+            </Flex>
             <Box mt="sm">
                 <Grid columns={12} gutter={0}>
                     <Grid.Col span={3}>

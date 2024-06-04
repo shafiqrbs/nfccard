@@ -11,7 +11,7 @@ function BoldCard() {
                     <img
                         src={formData.company_logo}
                         alt="Company Logo"
-                        style={{ position: 'absolute', right: 0, height: '50px', width: '100px', objectFit: 'contain', transform: 'translateY(-10%)', }}
+                        style={{ position: 'absolute', right: 0, height: '50px', width: '50%', objectFit: 'contain', transform: 'translateY(-10%)', }}
                     />
                     <Avatar
                         src={formData.profile_pic}

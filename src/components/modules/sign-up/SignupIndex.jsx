@@ -28,7 +28,7 @@ function SignupIndex() {
             {progress === 100 &&
                 <>
 
-                    <Box bg={'white'} p={'xs'} mt={6} className={'borderRadiusAll'}>
+                    <Box bg={'white'} mt={6} >
                         <SignupForm />
                     </Box>
                 </>

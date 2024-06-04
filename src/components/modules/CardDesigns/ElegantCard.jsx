@@ -6,7 +6,7 @@ function ElegantCard() {
     const formData = readLocalStorageValue({ key: 'signup-form-data' });
     return (
         <Card shadow="lg" padding="xs" radius="md" style={{ width: '100mm', height: '60mm' }} bg={'var(--mantine-color-gray-0)'}>
-            <Box textAlign="center" mt={'xs'} ml={'xs'} mb={10}>
+            <Box textAlign="center" mt={'4'} ml={'xs'} mb={10}>
                 <Text weight={700} size="md">{formData.name}</Text>
                 <Text c="dimmed" size="sm">{formData.designation}</Text>
             </Box>
@@ -20,7 +20,7 @@ function ElegantCard() {
             </div>
 
             <Divider my="sm" />
-            <Box textAlign="left">
+            <Box ta="left" >
                 <Grid columns={12} gutter={0}>
                     <Grid.Col span={1}>
                         <IconPhone size={16} />
@@ -42,7 +42,7 @@ function ElegantCard() {
                         <IconMapPin size={16} />
                     </Grid.Col>
                     <Grid.Col span={11}>
-                        <Text size="sm">{formData.address}</Text>
+                        <Text size="sm">{formData.address}{formData.address}</Text>
                     </Grid.Col>
                 </Grid>
 
@@ -51,7 +51,7 @@ function ElegantCard() {
                 <img
                     src={formData.company_logo}
                     alt="Company Logo"
-                    style={{ position: 'absolute', right: "35%", height: '40px', width: '100px', objectFit: 'contain', transform: 'translateY(10%)', }}
+                    style={{ position: 'absolute', right: "25%", height: '35px', width: '50%', objectFit: 'contain', transform: 'translateY(10%)', }}
                 />
 
             </div>

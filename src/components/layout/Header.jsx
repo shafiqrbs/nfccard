@@ -72,7 +72,7 @@ export default function Header({
         <Box bg={'white'} pos={`relative`}>
             <Group justify="space-between" h="100%" bg={'white'} pr={'xs'} className="borderRadiusHeader">
                 <Link to="/home">
-                    <Image h={40} fit={'contain'} src={LazyCoders} alt="Facebook" />
+                    <Image h={40} fit={'contain'} maw={{ base: '50%', md: '60%' }} src={LazyCoders} alt="Facebook" />
                 </Link>
                 <Group>
                     {isHomePage && !isClicked && (

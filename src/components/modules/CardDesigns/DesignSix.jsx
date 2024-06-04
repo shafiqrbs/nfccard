@@ -18,9 +18,9 @@ function DesignSix() {
                 </Image>
 
             </Box>
-            <Box textAlign="center" mt={'xl'}>
+            <Box ta="center" mt={'xl'}>
                 <Text weight={700} size="md" color="#343A40">{formData.name}</Text>
-                <Text color="dimmed" size="sm">{formData.designation}</Text>
+                <Text c="dimmed" size="sm">{formData.designation}</Text>
             </Box>
             <Divider my="sm" />
             <Box >
@@ -57,7 +57,7 @@ function DesignSix() {
             >
                 <Box sx={{ textAlign: 'center', backgroundColor: '#343A40' }}>
                     <Center >
-                        <Image src={formData.company_logo} height={60} fit="contain" alt="Company Logo" maw={'50%'} />
+                        <Image src={formData.company_logo} height={60} fit="contain" alt="Company Logo" maw={'80%'} />
                     </Center>
                 </Box>
             </Stack>
