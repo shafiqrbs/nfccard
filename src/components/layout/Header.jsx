@@ -66,7 +66,7 @@ export default function Header({
     };
 
     // Check if the current path is home
-    const isHomePage = location.pathname === "/home";
+    const isHomePage = location.pathname === "/";
 
     return (
         <Box bg={'white'} pos={`relative`}>

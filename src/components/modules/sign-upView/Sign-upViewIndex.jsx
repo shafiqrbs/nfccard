@@ -14,8 +14,8 @@ import {
     setSearchKeyword
 } from "../../../store/core/crudSlice.js";
 import { getLoadingProgress } from "../../global-hook/loading-progress/getLoadingProgress.js";
-import ViewCard from "./ViewCard.jsx";
-import ViewCardIndex from "./ViewCardIndex.jsx";
+
+import ViewCardIndex from "./ViewCard.jsx";
 import ContactCard from "./ContactCard.jsx";
 import ContactCardPrev from "./ContactCardPrev.jsx";
 import BoldCard from "../CardDesigns/BoldCard.jsx";
@@ -25,6 +25,7 @@ import DesignFour from "../CardDesigns/DesignFour.jsx";
 import DesignFive from "../CardDesigns/DesignFive.jsx";
 import { useViewportSize } from "@mantine/hooks";
 import DesignSix from "../CardDesigns/DesignSix.jsx";
+import ViewCard from "./ViewCard.jsx";
 
 function SignupViewIndex({ setFormData }) {
     const { t, i18n } = useTranslation();
@@ -45,8 +46,8 @@ function SignupViewIndex({ setFormData }) {
             {progress === 100 &&
                 <>
                     {/* {console.log(setFormData)} */}
-                    <Box bg={'white'} p={0} pt={2}>
-                        <ViewCardIndex />
+                    <Box >
+                        <ViewCard />
                         {/* <ViewCard /> */}
                         {/* <ContactCard /> */}
                         {/* <ContactCardPrev /> */}
