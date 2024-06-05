@@ -10,6 +10,7 @@ const persistConfig = {
     key: "demo",
     keyPrefix: '',
     storage,
+    whitelist: [],
     whitelist: ['auth', 'locale'],
 }
 

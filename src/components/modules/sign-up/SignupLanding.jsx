@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
     Box,
-    Grid, Progress, Title, Container, Flex, Image
+    Grid, Progress, Title, Container, Flex, Image, Text
 } from "@mantine/core";
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from "react-redux";
@@ -53,7 +53,8 @@ function SignupLanding() {
             {progress !== 100 && <Progress color="red" size={"xs"} striped animated value={progress} />}
             {progress === 100 &&
                 <>
-
+                    <Text> ALL OKKK</Text>
+                    {console.log('landing loaded')}
                 </>
             }
         </>

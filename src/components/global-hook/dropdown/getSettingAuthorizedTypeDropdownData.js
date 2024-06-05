@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {getSettingDropdown,} from "../../../store/utility/utilitySlice.js";
+import { getSettingDropdown, } from "../../../store/utility/utilitySlice.js";
 
 const getSettingAuthorizedTypeDropdownData = () => {
     const dispatch = useDispatch();
     const [settingDropdown, setSettingDropdown] = useState([]);
 
     useEffect(() => {
+        console.log('ok');
         const value = {
             url: 'utility/select/setting',
             param: { 'dropdown-type': 'authorised-type' }

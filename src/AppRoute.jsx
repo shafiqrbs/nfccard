@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom'
-import Login from './components/Login'
 import Layout from './components/layout/Layout'
 
 
@@ -18,9 +17,9 @@ function AppRoute() {
     return (
         <Routes>
             <Route path="/" element={<Layout />}>
-                <Route path='home' element={<SignupLanding />} />
+                <Route path='' element={<SignupLanding />} />
                 <Route path='sign-up' element={<SignupIndex />} />
-                <Route path='demo' element={<Demo />} />
+                {/* <Route path='demo' element={<Demo />} /> */}
                 <Route path='sign-upView' element={<SignupViewIndex />} />
                 <Route path='sign-up-edit' element={<SignupEditForm />} />
                 <Route path='sign-up-users' element={<SignupTableIndex />} />

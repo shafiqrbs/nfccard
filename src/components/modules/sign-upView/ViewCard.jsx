@@ -427,7 +427,7 @@ function ViewCard() {
                                                 onCancel: () => console.log('Cancel'),
                                                 onConfirm: () => {
                                                     navigate('/card-select');
-                                                    console.log('ok');
+                                                    // console.log('ok');
                                                 },
                                             })}
                                         >

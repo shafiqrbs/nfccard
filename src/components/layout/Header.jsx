@@ -62,7 +62,7 @@ export default function Header({
 
     const [isClicked, setIsClicked] = useState(false);
     const handleClick = () => {
-        navigate('/sign-up');
+        navigate('./sign-up');
     };
 
     // Check if the current path is home
@@ -71,7 +71,7 @@ export default function Header({
     return (
         <Box bg={'white'} pos={`relative`}>
             <Group justify="space-between" h="100%" bg={'white'} pr={'xs'} className="borderRadiusHeader">
-                <Link to="/home">
+                <Link to="/">
                     <Image h={40} fit={'contain'} maw={{ base: '50%', md: '60%' }} src={LazyCoders} alt="Facebook" />
                 </Link>
                 <Group>
